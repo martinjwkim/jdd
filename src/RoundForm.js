@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
+import ScoresTable from './ScoresTable'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -31,9 +32,8 @@ function RoundForm({ setRound, round, players, scores, setScores}) {
       ...oldScores,
       [round]: formData
     }))
-    setRound((round) => round + 1)
     setFormData(()=>INITIAL_STATE)
-    console.log(scores);
+    setRound((round) => round + 1)
   };
 
   const handleChange = evt => {
@@ -47,7 +47,7 @@ function RoundForm({ setRound, round, players, scores, setScores}) {
   const showInputs = () => {
     return ['player1', 'player2', 'player3', 'player4'].map(key => (
       <TextField 
-        id="standard-basic"
+        id={key}
         key={key} 
         name={key} 
         label={`${players[key]} Cards Left`} 
@@ -66,6 +66,7 @@ function RoundForm({ setRound, round, players, scores, setScores}) {
         {showInputs()}
         <Button type='submit'>Submit</Button>
       </form>
+      <ScoresTable players={players} scores={scores} round={round}/>
     </div>
   );
 }
