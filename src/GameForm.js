@@ -9,15 +9,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function GameForm({setRound}) {
+function GameForm({setRound, setPlayers}) {
   const classes = useStyles();
   const INITIAL_STATE = {'player1':'Player 1','player2':'Player 2','player3':'Player 3','player4':'Player 4'}
   const [formData, setFormData] = useState(INITIAL_STATE);
 
   const handleSubmit = async (evt) => {
     evt.preventDefault();
-    console.log(formData)
-    setRound(1)
+    setPlayers(formData)
+    console.log(formData);
+    setRound(1);
   };
 
   const handleChange = evt => {
