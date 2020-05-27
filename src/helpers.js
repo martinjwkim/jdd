@@ -16,4 +16,23 @@ function scoreMultiplier(num) {
   }
 }
 
-export { scoreMultiplier };
+function moneyCalc(arr) {
+  let minNum = Math.min(...arr);
+  let standArr = arr.map(num => num + Math.abs(minNum));
+  let totalWon = standArr.reduce(function (a, b) {
+    return a + b;
+  }, 0);
+
+  console.log(totalWon)
+  console.log(standArr)
+  return standArr.map(num => {
+    if (num !== 0) {
+      return totalWon - (num * 4)
+    }
+    else {
+      return totalWon
+    }
+  })
+}
+
+export { scoreMultiplier, moneyCalc };

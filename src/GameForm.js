@@ -17,7 +17,6 @@ function GameForm({setRound, setPlayers}) {
   const handleSubmit = async (evt) => {
     evt.preventDefault();
     setPlayers(formData)
-    console.log('players = ',formData);
     setRound(1);
   };
 
