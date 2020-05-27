@@ -7,27 +7,28 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import {scoreMultiplier, bgColor} from './helpers'
+import { scoreMultiplier, bgColor } from './helpers'
 
-const useStyles = makeStyles({
-});
+const useStyles = makeStyles((theme) => ({
+
+}));
 
 function createData(round, player1, player2, player3, player4) {
   if (player1) {
     return {
       round,
-      player1: {score: `${player1} | ${scoreMultiplier(player1)}`, color: bgColor(player1)},
-      player2: {score: `${player2} | ${scoreMultiplier(player2)}`, color: bgColor(player2)},
-      player3: {score: `${player3} | ${scoreMultiplier(player3)}`, color: bgColor(player3)},
-      player4: {score: `${player4} | ${scoreMultiplier(player4)}`, color: bgColor(player4)}
+      player1: { score: `${player1} | ${scoreMultiplier(player1)}`, color: bgColor(player1) },
+      player2: { score: `${player2} | ${scoreMultiplier(player2)}`, color: bgColor(player2) },
+      player3: { score: `${player3} | ${scoreMultiplier(player3)}`, color: bgColor(player3) },
+      player4: { score: `${player4} | ${scoreMultiplier(player4)}`, color: bgColor(player4) }
     };
   } else {
     return {
       round,
-      player1: {score: "", color: 'white'},
-      player2: {score: "", color: 'white'},
-      player3: {score: "", color: 'white'},
-      player4: {score: "", color: 'white'}
+      player1: { score: "", color: 'white' },
+      player2: { score: "", color: 'white' },
+      player3: { score: "", color: 'white' },
+      player4: { score: "", color: 'white' }
     };
   }
 }
@@ -47,28 +48,28 @@ function ScoresTable({ players, scores }) {
     )
 
   return (
-    <div style={{ width: '40vw', marginTop: '10vh'}}>
+    <div style={{ width: '40vw', marginTop: '7vh' }}>
       <TableContainer component={Paper}>
         <Table className={classes.table} aria-label="simple table">
           <TableHead>
-            <TableRow>
-              <TableCell>Round</TableCell>
-              <TableCell align="center">{players.player1}</TableCell>
-              <TableCell align="center">{players.player2}</TableCell>
-              <TableCell align="center">{players.player3}</TableCell>
-              <TableCell align="center">{players.player4}</TableCell>
+            <TableRow className={classes.tablecell}>
+              <TableCell style={{fontSize:'18px'}}>Round</TableCell>
+              <TableCell style={{fontSize:'18px'}} align="center">{players.player1}</TableCell>
+              <TableCell style={{fontSize:'18px'}} align="center">{players.player2}</TableCell>
+              <TableCell style={{fontSize:'18px'}} align="center">{players.player3}</TableCell>
+              <TableCell style={{fontSize:'18px'}} align="center">{players.player4}</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {rows.map((row) => (
               <TableRow key={row.round}>
-                <TableCell>
+                <TableCell style={{fontSize:'18px'}}>
                   {row.round}
                 </TableCell>
-                <TableCell style={{background: row.player1.color}} align="center">{row.player1.score}</TableCell>
-                <TableCell style={{background: row.player2.color}} align="center">{row.player2.score}</TableCell>
-                <TableCell style={{background: row.player3.color}} align="center">{row.player3.score}</TableCell>
-                <TableCell style={{background: row.player4.color}} align="center">{row.player4.score}</TableCell>
+                <TableCell style={{ fontSize:'18px', background: row.player1.color }} align="center">{row.player1.score}</TableCell>
+                <TableCell style={{ fontSize:'18px', background: row.player2.color }} align="center">{row.player2.score}</TableCell>
+                <TableCell style={{ fontSize:'18px', background: row.player3.color }} align="center">{row.player3.score}</TableCell>
+                <TableCell style={{ fontSize:'18px', background: row.player4.color }} align="center">{row.player4.score}</TableCell>
               </TableRow>
             ))}
           </TableBody>

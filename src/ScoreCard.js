@@ -7,7 +7,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import {scoreMultiplier, moneyCalc} from './helpers'
+import {scoreMultiplier, moneyCalc, finalScoreColor} from './helpers'
 
 
 const useStyles = makeStyles({
@@ -37,9 +37,10 @@ function ScoreCard({ players, scores, multiplier }) {
     }
 
     setFinalScores({ player1, player2, player3, player4 })
-    setMoneyScores(moneyCalc([player1,player2,player3,player4]))
 
-  }, [scores]);
+    setMoneyScores(moneyCalc([player1,player2,player3,player4], multiplier))
+
+  }, [scores, multiplier]);
 
   return (
     <div style={{ width: '50vw', marginTop:'5vw' }}>
@@ -47,27 +48,27 @@ function ScoreCard({ players, scores, multiplier }) {
         <Table className={classes.table} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell align="center"></TableCell>
-              <TableCell align="center">{players.player1}</TableCell>
-              <TableCell align="center">{players.player2}</TableCell>
-              <TableCell align="center">{players.player3}</TableCell>
-              <TableCell align="center">{players.player4}</TableCell>
+              <TableCell style={{fontSize:'18px'}} align="center"></TableCell>
+              <TableCell style={{fontSize:'18px'}} align="center">{players.player1}</TableCell>
+              <TableCell style={{fontSize:'18px'}} align="center">{players.player2}</TableCell>
+              <TableCell style={{fontSize:'18px'}} align="center">{players.player3}</TableCell>
+              <TableCell style={{fontSize:'18px'}} align="center">{players.player4}</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             <TableRow>
-              <TableCell align="center" component="th" scope="row">Total Score</TableCell>
-              <TableCell align="center">{finalScores.player1}</TableCell>
-              <TableCell align="center">{finalScores.player2}</TableCell>
-              <TableCell align="center">{finalScores.player3}</TableCell>
-              <TableCell align="center">{finalScores.player4}</TableCell>
+              <TableCell style={{fontSize:'18px'}} align="center" component="th" scope="row">Total Score</TableCell>
+              <TableCell style={{fontSize:'18px'}} align="center">{finalScores.player1}</TableCell>
+              <TableCell style={{fontSize:'18px'}} align="center">{finalScores.player2}</TableCell>
+              <TableCell style={{fontSize:'18px'}} align="center">{finalScores.player3}</TableCell>
+              <TableCell style={{fontSize:'18px'}} align="center">{finalScores.player4}</TableCell>
             </TableRow>
             <TableRow>
-              <TableCell align="center" component="th" scope="row">Money Owed</TableCell>
-              <TableCell align="center">{(moneyScores[0]*multiplier).toFixed(2)}</TableCell>
-              <TableCell align="center">{(moneyScores[1]*multiplier).toFixed(2)}</TableCell>
-              <TableCell align="center">{(moneyScores[2]*multiplier).toFixed(2)}</TableCell>
-              <TableCell align="center">{(moneyScores[3]*multiplier).toFixed(2)}</TableCell>
+              <TableCell style={{fontSize:'18px'}} align="center" component="th" scope="row">Money Owed</TableCell>
+              <TableCell style={{fontSize:'18px', background: finalScoreColor(moneyScores[0])}} align="center">{moneyScores[0]}</TableCell>
+              <TableCell style={{fontSize:'18px', background: finalScoreColor(moneyScores[1])}} align="center">{moneyScores[1]}</TableCell>
+              <TableCell style={{fontSize:'18px', background: finalScoreColor(moneyScores[2])}} align="center">{moneyScores[2]}</TableCell>
+              <TableCell style={{fontSize:'18px', background: finalScoreColor(moneyScores[3])}} align="center">{moneyScores[3]}</TableCell>
             </TableRow>
           </TableBody>
         </Table>
