@@ -65,10 +65,10 @@ function ScoreCard({ players, scores, multiplier }) {
             </TableRow>
             <TableRow>
               <TableCell style={{fontSize:'18px'}} align="center" component="th" scope="row">Money Owed</TableCell>
-              <TableCell style={{fontSize:'18px', background: finalScoreColor(moneyScores[0])}} align="center">{moneyScores[0]}</TableCell>
-              <TableCell style={{fontSize:'18px', background: finalScoreColor(moneyScores[1])}} align="center">{moneyScores[1]}</TableCell>
-              <TableCell style={{fontSize:'18px', background: finalScoreColor(moneyScores[2])}} align="center">{moneyScores[2]}</TableCell>
-              <TableCell style={{fontSize:'18px', background: finalScoreColor(moneyScores[3])}} align="center">{moneyScores[3]}</TableCell>
+              <TableCell style={{fontSize:'18px', background: finalScoreColor(moneyScores[0])}} align="center">{`$${moneyScores[0]}`}</TableCell>
+              <TableCell style={{fontSize:'18px', background: finalScoreColor(moneyScores[1])}} align="center">{`$${moneyScores[1]}`}</TableCell>
+              <TableCell style={{fontSize:'18px', background: finalScoreColor(moneyScores[2])}} align="center">{`$${moneyScores[2]}`}</TableCell>
+              <TableCell style={{fontSize:'18px', background: finalScoreColor(moneyScores[3])}} align="center">{`$${moneyScores[3]}`}</TableCell>
             </TableRow>
           </TableBody>
         </Table>

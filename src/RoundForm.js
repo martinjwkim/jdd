@@ -49,6 +49,7 @@ function RoundForm({ setRound, round, players, scores, setScores }) {
   const showInputs = () => {
     return ['player1', 'player2', 'player3', 'player4'].map(key => (
       <TextField
+        type='number'
         id={key}
         key={key}
         name={key}
