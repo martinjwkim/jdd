@@ -10,9 +10,6 @@ import Paper from '@material-ui/core/Paper';
 import {scoreMultiplier, bgColor} from './helpers'
 
 const useStyles = makeStyles({
-  table: {
-    minWidth: 650,
-  },
 });
 
 function createData(round, player1, player2, player3, player4) {
@@ -50,7 +47,7 @@ function ScoresTable({ players, scores }) {
     )
 
   return (
-    <div style={{ width: '50vw' }}>
+    <div style={{ width: '40vw', marginTop: '10vh'}}>
       <TableContainer component={Paper}>
         <Table className={classes.table} aria-label="simple table">
           <TableHead>
@@ -65,7 +62,7 @@ function ScoresTable({ players, scores }) {
           <TableBody>
             {rows.map((row) => (
               <TableRow key={row.round}>
-                <TableCell component="th" scope="row">
+                <TableCell>
                   {row.round}
                 </TableCell>
                 <TableCell style={{background: row.player1.color}} align="center">{row.player1.score}</TableCell>

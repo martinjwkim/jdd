@@ -11,7 +11,7 @@ function NewGame() {
   const [multiplier, setMultipler] = useState(0.1)
 
   return (
-    <div>
+    <div style={{display:'flex', justifyContent: 'center'}}>
       {round === 0 && <GameForm setRound={setRound} setPlayers={setPlayers}/>}
       {round > 0 && round <= 10 && <RoundForm setRound={setRound} round={round} players={players} scores={scores} setScores={setScores}/>}
       {round > 10 && <FinalScores players={players} scores={scores} round={round} multiplier={multiplier}/>}

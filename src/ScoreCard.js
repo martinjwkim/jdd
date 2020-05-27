@@ -42,7 +42,7 @@ function ScoreCard({ players, scores, multiplier }) {
   }, [scores]);
 
   return (
-    <div style={{ width: '50vw' }}>
+    <div style={{ width: '50vw', marginTop:'5vw' }}>
       <TableContainer component={Paper}>
         <Table className={classes.table} aria-label="simple table">
           <TableHead>
@@ -56,14 +56,14 @@ function ScoreCard({ players, scores, multiplier }) {
           </TableHead>
           <TableBody>
             <TableRow>
-              <TableCell component="th" scope="row">Total Score</TableCell>
+              <TableCell align="center" component="th" scope="row">Total Score</TableCell>
               <TableCell align="center">{finalScores.player1}</TableCell>
               <TableCell align="center">{finalScores.player2}</TableCell>
               <TableCell align="center">{finalScores.player3}</TableCell>
               <TableCell align="center">{finalScores.player4}</TableCell>
             </TableRow>
             <TableRow>
-              <TableCell component="th" scope="row">Money Owed</TableCell>
+              <TableCell align="center" component="th" scope="row">Money Owed</TableCell>
               <TableCell align="center">{(moneyScores[0]*multiplier).toFixed(2)}</TableCell>
               <TableCell align="center">{(moneyScores[1]*multiplier).toFixed(2)}</TableCell>
               <TableCell align="center">{(moneyScores[2]*multiplier).toFixed(2)}</TableCell>

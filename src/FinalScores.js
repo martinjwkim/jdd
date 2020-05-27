@@ -6,9 +6,9 @@ import ScoreCard from './ScoreCard'
 function FinalScores({players, scores, round, multiplier}) {
 
   return (
-    <div>
-      <ScoresTable players={players} scores={scores} round={round}/>
+    <div style={{display: 'flex', justifyContent:'center', alignItems:'center', flexDirection:'column'}}>
       <ScoreCard players={players} scores={scores} multiplier={multiplier}/>
+      <ScoresTable players={players} scores={scores} round={round}/>
     </div>
   );
 }
