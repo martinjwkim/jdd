@@ -7,7 +7,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import {scoreMultiplier} from './helpers'
+import {scoreMultiplier, bgColor} from './helpers'
 
 const useStyles = makeStyles({
   table: {
@@ -19,23 +19,23 @@ function createData(round, player1, player2, player3, player4) {
   if (player1) {
     return {
       round,
-      player1: `${player1} | ${scoreMultiplier(player1)}`,
-      player2: `${player2} | ${scoreMultiplier(player2)}`,
-      player3: `${player3} | ${scoreMultiplier(player3)}`,
-      player4: `${player4} | ${scoreMultiplier(player4)}`
+      player1: {score: `${player1} | ${scoreMultiplier(player1)}`, color: bgColor(player1)},
+      player2: {score: `${player2} | ${scoreMultiplier(player2)}`, color: bgColor(player2)},
+      player3: {score: `${player3} | ${scoreMultiplier(player3)}`, color: bgColor(player3)},
+      player4: {score: `${player4} | ${scoreMultiplier(player4)}`, color: bgColor(player4)}
     };
   } else {
     return {
       round,
-      player1,
-      player2,
-      player3,
-      player4
+      player1: {score: "", color: 'white'},
+      player2: {score: "", color: 'white'},
+      player3: {score: "", color: 'white'},
+      player4: {score: "", color: 'white'}
     };
   }
 }
 
-export default function SimpleTable({ players, scores }) {
+function ScoresTable({ players, scores }) {
   const classes = useStyles();
 
   const rows =
@@ -68,10 +68,10 @@ export default function SimpleTable({ players, scores }) {
                 <TableCell component="th" scope="row">
                   {row.round}
                 </TableCell>
-                <TableCell align="center">{row.player1}</TableCell>
-                <TableCell align="center">{row.player2}</TableCell>
-                <TableCell align="center">{row.player3}</TableCell>
-                <TableCell align="center">{row.player4}</TableCell>
+                <TableCell style={{background: row.player1.color}} align="center">{row.player1.score}</TableCell>
+                <TableCell style={{background: row.player2.color}} align="center">{row.player2.score}</TableCell>
+                <TableCell style={{background: row.player3.color}} align="center">{row.player3.score}</TableCell>
+                <TableCell style={{background: row.player4.color}} align="center">{row.player4.score}</TableCell>
               </TableRow>
             ))}
           </TableBody>
@@ -80,3 +80,5 @@ export default function SimpleTable({ players, scores }) {
     </div>
   );
 }
+
+export default ScoresTable;

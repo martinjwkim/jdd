@@ -42,6 +42,7 @@ function Navigation() {
             Choi Dai Di
           </Typography>
           <Button color="inherit" onClick={()=>handleClick('newgame')}>New Game</Button>
+          <Button color="inherit" onClick={()=>handleClick('scores')}>Scores</Button>
         </Toolbar>
       </AppBar>
     </div>

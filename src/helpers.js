@@ -35,4 +35,22 @@ function moneyCalc(arr) {
   })
 }
 
-export { scoreMultiplier, moneyCalc };
+function bgColor(num) {
+  if (num === '0') {
+    return 'lightgreen'
+  }
+  else if (num > 0 && num <= 7) {
+    return 'white'
+  }
+  else if (num > 7 && num <= 9) {
+    return 'yellow'
+  }
+  else if (num > 9 && num <= 11) {
+    return 'orange'
+  }
+  else if (num > 11 && num <= 13) {
+    return 'red'
+  }
+}
+
+export { scoreMultiplier, moneyCalc, bgColor };
