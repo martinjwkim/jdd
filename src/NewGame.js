@@ -13,7 +13,7 @@ function NewGame() {
   return (
     <div style={{display:'flex', justifyContent: 'center'}}>
       {round === 0 && <GameForm setRound={setRound} setPlayers={setPlayers}/>}
-      {round > 0 && round <= 10 && <RoundForm setRound={setRound} round={round} players={players} scores={scores} setScores={setScores}/>}
+      {round > 0 && round <= 10 && <RoundForm setRound={setRound} round={round} players={players} scores={scores} setScores={setScores} multiplier={multiplier}/>}
       {round > 10 && <FinalScores players={players} scores={scores} round={round} multiplier={multiplier}/>}
     </div>
   );

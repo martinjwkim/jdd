@@ -51,7 +51,7 @@ function bgColor(num) {
 }
 
 function finalScoreColor(num) {
-  if (num<=0){
+  if (num<0){
     return 'lightcoral'
   }
   else if (num>0){

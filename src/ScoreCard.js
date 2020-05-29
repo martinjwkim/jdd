@@ -12,12 +12,12 @@ import {scoreMultiplier, moneyCalc, finalScoreColor} from './helpers'
 
 const useStyles = makeStyles({
   table: {
-    minWidth: 650,
+    minWidth: 300,
   },
 });
 
 
-function ScoreCard({ players, scores, multiplier }) {
+function ScoreCard({ players, scores, multiplier, columnNames = true }) {
   const classes = useStyles();
   const [finalScores, setFinalScores] = useState({});
   const [moneyScores, setMoneyScores] = useState([0,0,0,0]);
@@ -43,32 +43,32 @@ function ScoreCard({ players, scores, multiplier }) {
   }, [scores, multiplier]);
 
   return (
-    <div style={{ width: '50vw', marginTop:'5vw' }}>
+    <div style={{ width: '40vw', marginTop:'5vw' }}>
       <TableContainer component={Paper}>
         <Table className={classes.table} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell style={{fontSize:'18px'}} align="center"></TableCell>
-              <TableCell style={{fontSize:'18px'}} align="center">{players.player1}</TableCell>
-              <TableCell style={{fontSize:'18px'}} align="center">{players.player2}</TableCell>
-              <TableCell style={{fontSize:'18px'}} align="center">{players.player3}</TableCell>
-              <TableCell style={{fontSize:'18px'}} align="center">{players.player4}</TableCell>
+              {columnNames && <TableCell style={{fontSize:'24px'}} align="center"></TableCell>}
+              <TableCell style={{fontSize:'24px'}} align="center">{players.player1}</TableCell>
+              <TableCell style={{fontSize:'24px'}} align="center">{players.player2}</TableCell>
+              <TableCell style={{fontSize:'24px'}} align="center">{players.player3}</TableCell>
+              <TableCell style={{fontSize:'24px'}} align="center">{players.player4}</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             <TableRow>
-              <TableCell style={{fontSize:'18px'}} align="center" component="th" scope="row">Total Score</TableCell>
-              <TableCell style={{fontSize:'18px'}} align="center">{finalScores.player1}</TableCell>
-              <TableCell style={{fontSize:'18px'}} align="center">{finalScores.player2}</TableCell>
-              <TableCell style={{fontSize:'18px'}} align="center">{finalScores.player3}</TableCell>
-              <TableCell style={{fontSize:'18px'}} align="center">{finalScores.player4}</TableCell>
+              {columnNames && <TableCell style={{fontSize:'24px'}} align="center" component="th" scope="row">Total Score</TableCell>}
+              <TableCell style={{fontSize:'24px'}} align="center">{finalScores.player1}</TableCell>
+              <TableCell style={{fontSize:'24px'}} align="center">{finalScores.player2}</TableCell>
+              <TableCell style={{fontSize:'24px'}} align="center">{finalScores.player3}</TableCell>
+              <TableCell style={{fontSize:'24px'}} align="center">{finalScores.player4}</TableCell>
             </TableRow>
             <TableRow>
-              <TableCell style={{fontSize:'18px'}} align="center" component="th" scope="row">Money Owed</TableCell>
-              <TableCell style={{fontSize:'18px', background: finalScoreColor(moneyScores[0])}} align="center">{`$${moneyScores[0]}`}</TableCell>
-              <TableCell style={{fontSize:'18px', background: finalScoreColor(moneyScores[1])}} align="center">{`$${moneyScores[1]}`}</TableCell>
-              <TableCell style={{fontSize:'18px', background: finalScoreColor(moneyScores[2])}} align="center">{`$${moneyScores[2]}`}</TableCell>
-              <TableCell style={{fontSize:'18px', background: finalScoreColor(moneyScores[3])}} align="center">{`$${moneyScores[3]}`}</TableCell>
+              {columnNames && <TableCell style={{fontSize:'24px'}} align="center" component="th" scope="row">Money Owed</TableCell>}
+              <TableCell style={{fontSize:'24px', background: finalScoreColor(moneyScores[0])}} align="center">{`$${moneyScores[0]}`}</TableCell>
+              <TableCell style={{fontSize:'24px', background: finalScoreColor(moneyScores[1])}} align="center">{`$${moneyScores[1]}`}</TableCell>
+              <TableCell style={{fontSize:'24px', background: finalScoreColor(moneyScores[2])}} align="center">{`$${moneyScores[2]}`}</TableCell>
+              <TableCell style={{fontSize:'24px', background: finalScoreColor(moneyScores[3])}} align="center">{`$${moneyScores[3]}`}</TableCell>
             </TableRow>
           </TableBody>
         </Table>
