@@ -55,11 +55,12 @@ function RoundForm({ setRound, round, players, scores, setScores, multiplier }) 
       <TextField
         type='number'
         id={key}
-        key={key}
+        key={`${round}-${key}`}
         name={key}
         size='medium'
         label={`${players[key]}`}
         onChange={handleChange}
+        autoFocus = {key === 'player1' ? true : false}
         value={formData[key]} />
     ))
   }
@@ -82,7 +83,7 @@ function RoundForm({ setRound, round, players, scores, setScores, multiplier }) 
                   <EditIcon />
                 </IconButton>
               </Typography>
-              <Typography variant="p" className={classes.title}>
+              <Typography className={classes.title}>
                 Enter remaining cards:
               </Typography>
               <form className={classes.root} noValidate autoComplete="off" onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>

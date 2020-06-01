@@ -7,7 +7,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import {scoreMultiplier, moneyCalc, finalScoreColor} from './helpers'
+import { scoreMultiplier, moneyCalc, finalScoreColor, getCurrentDate } from './helpers'
 
 
 const useStyles = makeStyles({
@@ -17,10 +17,10 @@ const useStyles = makeStyles({
 });
 
 
-function ScoreCard({ players, scores, multiplier, columnNames = true }) {
+function ScoreCard({ round, players, scores, multiplier, columnNames = true }) {
   const classes = useStyles();
   const [finalScores, setFinalScores] = useState({});
-  const [moneyScores, setMoneyScores] = useState([0,0,0,0]);
+  const [moneyScores, setMoneyScores] = useState([0, 0, 0, 0]);
 
 
   useEffect(() => {
@@ -38,37 +38,45 @@ function ScoreCard({ players, scores, multiplier, columnNames = true }) {
 
     setFinalScores({ player1, player2, player3, player4 })
 
-    setMoneyScores(moneyCalc([player1,player2,player3,player4], multiplier))
+    setMoneyScores(moneyCalc([player1, player2, player3, player4], multiplier))
+    if (round === 10) {
+      let currentDate = getCurrentDate();
+      let oldScores = [];
+      if (localStorage.getItem('jdd-scores')) {
+        oldScores = JSON.parse(localStorage.getItem('jdd-scores'));
+      }
+      localStorage.setItem('jdd-scores', JSON.stringify([...oldScores, { [currentDate]: {player1,player2,player3,player4} }]));
+    }
 
-  }, [scores, multiplier]);
+  }, [scores, multiplier, round]);
 
   return (
-    <div style={{ width: '40vw', marginTop:'5vw' }}>
+    <div style={{ width: '40vw', marginTop: '5vw' }}>
       <TableContainer component={Paper}>
         <Table className={classes.table} aria-label="simple table">
           <TableHead>
             <TableRow>
-              {columnNames && <TableCell style={{fontSize:'24px'}} align="center"></TableCell>}
-              <TableCell style={{fontSize:'24px'}} align="center">{players.player1}</TableCell>
-              <TableCell style={{fontSize:'24px'}} align="center">{players.player2}</TableCell>
-              <TableCell style={{fontSize:'24px'}} align="center">{players.player3}</TableCell>
-              <TableCell style={{fontSize:'24px'}} align="center">{players.player4}</TableCell>
+              {columnNames && <TableCell style={{ fontSize: '24px' }} align="center"></TableCell>}
+              <TableCell style={{ fontSize: '24px' }} align="center">{players.player1}</TableCell>
+              <TableCell style={{ fontSize: '24px' }} align="center">{players.player2}</TableCell>
+              <TableCell style={{ fontSize: '24px' }} align="center">{players.player3}</TableCell>
+              <TableCell style={{ fontSize: '24px' }} align="center">{players.player4}</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             <TableRow>
-              {columnNames && <TableCell style={{fontSize:'24px'}} align="center" component="th" scope="row">Total Score</TableCell>}
-              <TableCell style={{fontSize:'24px'}} align="center">{finalScores.player1}</TableCell>
-              <TableCell style={{fontSize:'24px'}} align="center">{finalScores.player2}</TableCell>
-              <TableCell style={{fontSize:'24px'}} align="center">{finalScores.player3}</TableCell>
-              <TableCell style={{fontSize:'24px'}} align="center">{finalScores.player4}</TableCell>
+              {columnNames && <TableCell style={{ fontSize: '24px' }} align="center" component="th" scope="row">Total Score</TableCell>}
+              <TableCell style={{ fontSize: '24px' }} align="center">{finalScores.player1}</TableCell>
+              <TableCell style={{ fontSize: '24px' }} align="center">{finalScores.player2}</TableCell>
+              <TableCell style={{ fontSize: '24px' }} align="center">{finalScores.player3}</TableCell>
+              <TableCell style={{ fontSize: '24px' }} align="center">{finalScores.player4}</TableCell>
             </TableRow>
             <TableRow>
-              {columnNames && <TableCell style={{fontSize:'24px'}} align="center" component="th" scope="row">Money Owed</TableCell>}
-              <TableCell style={{fontSize:'24px', background: finalScoreColor(moneyScores[0])}} align="center">{`$${moneyScores[0]}`}</TableCell>
-              <TableCell style={{fontSize:'24px', background: finalScoreColor(moneyScores[1])}} align="center">{`$${moneyScores[1]}`}</TableCell>
-              <TableCell style={{fontSize:'24px', background: finalScoreColor(moneyScores[2])}} align="center">{`$${moneyScores[2]}`}</TableCell>
-              <TableCell style={{fontSize:'24px', background: finalScoreColor(moneyScores[3])}} align="center">{`$${moneyScores[3]}`}</TableCell>
+              {columnNames && <TableCell style={{ fontSize: '24px' }} align="center" component="th" scope="row">Money Owed</TableCell>}
+              <TableCell style={{ fontSize: '24px', background: finalScoreColor(moneyScores[0]) }} align="center">{`$${moneyScores[0]}`}</TableCell>
+              <TableCell style={{ fontSize: '24px', background: finalScoreColor(moneyScores[1]) }} align="center">{`$${moneyScores[1]}`}</TableCell>
+              <TableCell style={{ fontSize: '24px', background: finalScoreColor(moneyScores[2]) }} align="center">{`$${moneyScores[2]}`}</TableCell>
+              <TableCell style={{ fontSize: '24px', background: finalScoreColor(moneyScores[3]) }} align="center">{`$${moneyScores[3]}`}</TableCell>
             </TableRow>
           </TableBody>
         </Table>

@@ -62,4 +62,13 @@ function finalScoreColor(num) {
   }
 }
 
-export { scoreMultiplier, moneyCalc, bgColor, finalScoreColor };
+function getCurrentDate(){
+
+  let newDate = new Date()
+  let date = newDate.getDate();
+  let month = newDate.getMonth() + 1;
+  
+  return `${month<10?`0${month}`:`${month}`}-${date}`
+  }
+
+export { scoreMultiplier, moneyCalc, bgColor, finalScoreColor, getCurrentDate };
