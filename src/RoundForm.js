@@ -60,6 +60,7 @@ function RoundForm({ setRound, round, players, scores, setScores, multiplier }) 
         size='medium'
         label={`${players[key]}`}
         onChange={handleChange}
+        required = {true}
         autoFocus = {key === 'player1' ? true : false}
         value={formData[key]} />
     ))
@@ -73,7 +74,7 @@ function RoundForm({ setRound, round, players, scores, setScores, multiplier }) 
   return (
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
       <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', margin: '3vw' }}>
-        <ScoreCard players={players} scores={scores} multiplier={multiplier} columnNames={false} />
+        <ScoreCard players={players} scores={scores} multiplier={multiplier} columnNames={false} round={round}/>
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
           <Card className={classes.root} variant="outlined" style={{ width: '300px', marginTop: '5vh' }}>
             <CardContent>

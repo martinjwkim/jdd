@@ -39,13 +39,15 @@ function ScoreCard({ round, players, scores, multiplier, columnNames = true }) {
     setFinalScores({ player1, player2, player3, player4 })
 
     setMoneyScores(moneyCalc([player1, player2, player3, player4], multiplier))
+    console.log(round);
     if (round === 10) {
+      console.log('here');
       let currentDate = getCurrentDate();
       let oldScores = [];
       if (localStorage.getItem('jdd-scores')) {
         oldScores = JSON.parse(localStorage.getItem('jdd-scores'));
       }
-      localStorage.setItem('jdd-scores', JSON.stringify([...oldScores, { [currentDate]: {player1,player2,player3,player4} }]));
+      localStorage.setItem('jdd-scores', JSON.stringify([...oldScores, { [currentDate]: moneyCalc([player1, player2, player3, player4], multiplier) }]));
     }
 
   }, [scores, multiplier, round]);
