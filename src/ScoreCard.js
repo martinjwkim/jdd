@@ -37,17 +37,17 @@ function ScoreCard({ round, players, scores, multiplier, columnNames = true }) {
     }
 
     setFinalScores({ player1, player2, player3, player4 })
+    let moneyArr = moneyCalc([player1, player2, player3, player4], multiplier)
+    let moneyObj = {player1: moneyArr[0], player2: moneyArr[1], player3: moneyArr[2], player4: moneyArr[3]}
 
-    setMoneyScores(moneyCalc([player1, player2, player3, player4], multiplier))
-    console.log(round);
+    setMoneyScores(moneyArr)
     if (round === 10) {
-      console.log('here');
       let currentDate = getCurrentDate();
       let oldScores = [];
       if (localStorage.getItem('jdd-scores')) {
         oldScores = JSON.parse(localStorage.getItem('jdd-scores'));
       }
-      localStorage.setItem('jdd-scores', JSON.stringify([...oldScores, { [currentDate]: moneyCalc([player1, player2, player3, player4], multiplier) }]));
+      localStorage.setItem('jdd-scores', JSON.stringify([...oldScores, { date: currentDate, ...moneyObj }]));
     }
 
   }, [scores, multiplier, round]);
