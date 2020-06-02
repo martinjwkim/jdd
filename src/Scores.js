@@ -37,10 +37,10 @@ function Scores() {
             <TableHead>
               <TableRow>
                 <TableCell style={{ fontSize: '24px' }}>Date</TableCell>
-                <TableCell style={{ fontSize: '24px' }} align="right">Player 1</TableCell>
-                <TableCell style={{ fontSize: '24px' }} align="right">Player 2</TableCell>
-                <TableCell style={{ fontSize: '24px' }} align="right">Player 3</TableCell>
-                <TableCell style={{ fontSize: '24px' }} align="right">Player 4</TableCell>
+                <TableCell style={{ fontSize: '24px' }} align="center">Player 1</TableCell>
+                <TableCell style={{ fontSize: '24px' }} align="center">Player 2</TableCell>
+                <TableCell style={{ fontSize: '24px' }} align="center">Player 3</TableCell>
+                <TableCell style={{ fontSize: '24px' }} align="center">Player 4</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -49,10 +49,10 @@ function Scores() {
                   <TableCell style={{ fontSize: '24px' }} component="th" scope="score">
                     {score.date}
                   </TableCell>
-                  <TableCell style={{ fontSize: '24px', background: finalScoreColor(score.player1) }} align="right">{`$${score.player1}`}</TableCell>
-                  <TableCell style={{ fontSize: '24px', background: finalScoreColor(score.player2) }} align="right">{`$${score.player2}`}</TableCell>
-                  <TableCell style={{ fontSize: '24px', background: finalScoreColor(score.player3) }} align="right">{`$${score.player3}`}</TableCell>
-                  <TableCell style={{ fontSize: '24px', background: finalScoreColor(score.player4) }} align="right">{`$${score.player4}`}</TableCell>
+                  <TableCell style={{ fontSize: '24px', background: finalScoreColor(score.player1) }} align="center">{`$${score.player1}`}</TableCell>
+                  <TableCell style={{ fontSize: '24px', background: finalScoreColor(score.player2) }} align="center">{`$${score.player2}`}</TableCell>
+                  <TableCell style={{ fontSize: '24px', background: finalScoreColor(score.player3) }} align="center">{`$${score.player3}`}</TableCell>
+                  <TableCell style={{ fontSize: '24px', background: finalScoreColor(score.player4) }} align="center">{`$${score.player4}`}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
