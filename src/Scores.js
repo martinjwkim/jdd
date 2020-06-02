@@ -7,6 +7,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import {finalScoreColor} from './helpers'
 
 const useStyles = makeStyles({
   table: {
@@ -35,23 +36,23 @@ function Scores() {
           <Table className={classes.table} aria-label="simple table">
             <TableHead>
               <TableRow>
-                <TableCell>Date</TableCell>
-                <TableCell align="right">Player 1</TableCell>
-                <TableCell align="right">Player 2</TableCell>
-                <TableCell align="right">Player 3</TableCell>
-                <TableCell align="right">Player 4</TableCell>
+                <TableCell style={{ fontSize: '24px' }}>Date</TableCell>
+                <TableCell style={{ fontSize: '24px' }} align="right">Player 1</TableCell>
+                <TableCell style={{ fontSize: '24px' }} align="right">Player 2</TableCell>
+                <TableCell style={{ fontSize: '24px' }} align="right">Player 3</TableCell>
+                <TableCell style={{ fontSize: '24px' }} align="right">Player 4</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {scores.map((score) => (
                 <TableRow key={score.date}>
-                  <TableCell component="th" scope="score">
+                  <TableCell style={{ fontSize: '24px' }} component="th" scope="score">
                     {score.date}
                   </TableCell>
-                  <TableCell align="right">{score.player1}</TableCell>
-                  <TableCell align="right">{score.player2}</TableCell>
-                  <TableCell align="right">{score.player3}</TableCell>
-                  <TableCell align="right">{score.player4}</TableCell>
+                  <TableCell style={{ fontSize: '24px', background: finalScoreColor(score.player1) }} align="right">{`$${score.player1}`}</TableCell>
+                  <TableCell style={{ fontSize: '24px', background: finalScoreColor(score.player2) }} align="right">{`$${score.player2}`}</TableCell>
+                  <TableCell style={{ fontSize: '24px', background: finalScoreColor(score.player3) }} align="right">{`$${score.player3}`}</TableCell>
+                  <TableCell style={{ fontSize: '24px', background: finalScoreColor(score.player4) }} align="right">{`$${score.player4}`}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
