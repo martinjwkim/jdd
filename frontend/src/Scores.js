@@ -8,6 +8,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import {finalScoreColor} from './helpers'
+import './Scores.css'
 
 const useStyles = makeStyles({
   table: {
