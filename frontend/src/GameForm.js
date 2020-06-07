@@ -5,6 +5,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
+import './GameForm.css'
 
 const useStyles = makeStyles((theme) => ({
   margin: {
@@ -24,6 +25,13 @@ const useStyles = makeStyles((theme) => ({
   instructions: {
     flexGrow: 1,
   },
+  root: {
+    width: '300px',
+    marginTop: '25vh',
+  },
+  button: {
+    marginTop: '20px' 
+  }
 }));
 
 function GameForm({ setRound, setPlayers }) {
@@ -47,17 +55,17 @@ function GameForm({ setRound, setPlayers }) {
 
 
   return (
-    <Card className={classes.root} variant="outlined" style={{ width: '300px', marginTop: '25vh' }}>
+    <Card className={classes.root} variant="outlined">
       <CardContent>
         <Typography variant="h6" className={classes.instructions}>
           Enter player names:
         </Typography>
-        <form className={classes.root} noValidate autoComplete="off" onSubmit={handleSubmit}>
+        <form noValidate autoComplete="off" onSubmit={handleSubmit}>
           <TextField id="standard-basic" name="player1" label="Player 1" onChange={handleChange} /><br />
           <TextField id="standard-basic" name="player2" label="Player 2" onChange={handleChange} /><br />
           <TextField id="standard-basic" name="player3" label="Player 3" onChange={handleChange} /><br />
           <TextField id="standard-basic" name="player4" label="Player 4" onChange={handleChange} /><br />
-          <Button style={{ marginTop: '20px' }} type='submit' variant='contained' color='primary'>Submit</Button>
+          <Button className={classes.button} type='submit' variant='contained' color='primary'>Submit</Button>
         </form>
       </CardContent>
     </Card>

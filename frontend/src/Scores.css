@@ -1,0 +1,13 @@
+.Scores th {
+  font-size: 24px;
+}
+
+.Scores td {
+  font-size: 24px;
+}
+
+.Scores {
+  display: flex;
+  justify-content: center;
+  margin-top: 5vh;
+}

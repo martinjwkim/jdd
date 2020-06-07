@@ -1,0 +1,19 @@
+.RoundForm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.RoundForm-Left{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 3vw;
+}
+
+.RoundForm-Card{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

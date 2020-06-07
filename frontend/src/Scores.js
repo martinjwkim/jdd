@@ -7,18 +7,14 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import {finalScoreColor} from './helpers'
-import './Scores.css'
+import { finalScoreColor } from './helpers'
+import './Scores.css';
 
 const useStyles = makeStyles({
   table: {
     minWidth: 650,
   },
 });
-
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
 
 function Scores() {
 
@@ -37,23 +33,21 @@ function Scores() {
           <Table className={classes.table} aria-label="simple table">
             <TableHead>
               <TableRow>
-                <TableCell style={{ fontSize: '24px' }}>Date</TableCell>
-                <TableCell style={{ fontSize: '24px' }} align="center">Player 1</TableCell>
-                <TableCell style={{ fontSize: '24px' }} align="center">Player 2</TableCell>
-                <TableCell style={{ fontSize: '24px' }} align="center">Player 3</TableCell>
-                <TableCell style={{ fontSize: '24px' }} align="center">Player 4</TableCell>
+                <TableCell>Date</TableCell>
+                {['Player 1', 'Player 2', 'Player 3', 'Player 4'].map(player => (
+                  <TableCell align="center">{player}</TableCell>
+                ))}
               </TableRow>
             </TableHead>
             <TableBody>
               {scores.map((score) => (
                 <TableRow key={score.date}>
-                  <TableCell style={{ fontSize: '24px' }} component="th" scope="score">
+                  <TableCell component="th" scope="score">
                     {score.date}
                   </TableCell>
-                  <TableCell style={{ fontSize: '24px', background: finalScoreColor(score.player1) }} align="center">{`$${score.player1}`}</TableCell>
-                  <TableCell style={{ fontSize: '24px', background: finalScoreColor(score.player2) }} align="center">{`$${score.player2}`}</TableCell>
-                  <TableCell style={{ fontSize: '24px', background: finalScoreColor(score.player3) }} align="center">{`$${score.player3}`}</TableCell>
-                  <TableCell style={{ fontSize: '24px', background: finalScoreColor(score.player4) }} align="center">{`$${score.player4}`}</TableCell>
+                  {['player1', 'player2', 'player3', 'player4'].map(player => (
+                    <TableCell style={{ background: finalScoreColor(score[player]) }} align="center">{`$${score[player]}`}</TableCell>
+                  ))}
                 </TableRow>
               ))}
             </TableBody>
@@ -64,7 +58,7 @@ function Scores() {
   }
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', marginTop: '5vh' }}>
+    <div className='Scores'>
       {scores && showScores()}
     </div>
   );

@@ -12,6 +12,8 @@ const useStyles = makeStyles((theme) => ({
   },
   root: {
     flexGrow: 1,
+    width: '300px',
+    marginTop: '5vh',
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -19,6 +21,16 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
   },
+  form: {
+    flexGrow: 1,
+    display: 'flex', 
+    flexDirection: 'column', 
+    justifyContent: 'center', 
+    alignItems: 'center'
+  },
+  button: {
+    marginTop: '20px',
+  }
 }));
 
 
@@ -65,12 +77,12 @@ function EditForm({ players, setScores, setShowEditForm }) {
   }
 
   return (
-    <Card className={classes.root} variant="outlined" style={{ width: '300px', marginTop: '5vh' }}>
+    <Card className={classes.root} variant="outlined">
       <CardContent>
         <Typography variant="h6" className={classes.title}>
           Edit Round
         </Typography>
-        <form className={classes.root} noValidate autoComplete="off" onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+        <form className={classes.form} noValidate autoComplete="off" onSubmit={handleSubmit}>
           <TextField
             id='round'
             name='round'
@@ -79,7 +91,7 @@ function EditForm({ players, setScores, setShowEditForm }) {
             onChange={handleChange}
             value={formData.round} />
           {showInputs()}
-          <Button style={{ marginTop: '20px' }} type='submit' variant='contained' color='primary'>Submit</Button>
+          <Button className={classes.button} type='submit' variant='contained' color='primary'>Submit</Button>
         </form>
       </CardContent>
     </Card>

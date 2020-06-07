@@ -10,6 +10,7 @@ import IconButton from '@material-ui/core/IconButton';
 import EditForm from './EditForm'
 import ScoreCard from './ScoreCard'
 import ScoresTable from './ScoresTable'
+import './RoundForm.css'
 
 const useStyles = makeStyles((theme) => ({
   margin: {
@@ -17,6 +18,15 @@ const useStyles = makeStyles((theme) => ({
   },
   root: {
     flexGrow: 1,
+    width: '300px',
+    marginTop: '5vh'
+  },
+  form: {
+    flexGrow: 1,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -24,6 +34,9 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
   },
+  button: {
+    marginTop: '20px'
+  }
 }));
 
 function RoundForm({ setRound, round, players, scores, setScores, multiplier }) {
@@ -72,11 +85,11 @@ function RoundForm({ setRound, round, players, scores, setScores, multiplier }) 
 
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-      <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', margin: '3vw' }}>
+    <div className='RoundForm'>
+      <div className='RoundForm-Left'>
         <ScoreCard players={players} scores={scores} multiplier={multiplier} columnNames={false} round={round}/>
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-          <Card className={classes.root} variant="outlined" style={{ width: '300px', marginTop: '5vh' }}>
+        <div className='RoundForm-Card'>
+          <Card className={classes.root} variant="outlined">
             <CardContent>
               <Typography variant="h6" className={classes.title}>
                 Round {round}
@@ -87,9 +100,9 @@ function RoundForm({ setRound, round, players, scores, setScores, multiplier }) 
               <Typography className={classes.title}>
                 Enter remaining cards:
               </Typography>
-              <form className={classes.root} noValidate autoComplete="off" onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+              <form className={classes.form} noValidate autoComplete="off" onSubmit={handleSubmit}>
                 {showInputs()}
-                <Button style={{ marginTop: '20px' }} type='submit' variant='contained' color='primary'>Submit</Button>
+                <Button className={classes.button} type='submit' variant='contained' color='primary'>Submit</Button>
               </form>
             </CardContent>
           </Card>
