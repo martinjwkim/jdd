@@ -17,7 +17,7 @@ const useStyles = makeStyles({
 });
 
 
-function ScoreCard({ round, players, scores, multiplier, columnNames = true }) {
+function ScoreCard({ round, players, scores, multiplier, columnNames = true, endGame }) {
   const classes = useStyles();
   const [finalScores, setFinalScores] = useState({});
   const [moneyScores, setMoneyScores] = useState([0, 0, 0, 0]);
@@ -41,7 +41,7 @@ function ScoreCard({ round, players, scores, multiplier, columnNames = true }) {
     let moneyObj = {player1: moneyArr[0], player2: moneyArr[1], player3: moneyArr[2], player4: moneyArr[3]}
 
     setMoneyScores(moneyArr)
-    if (round === 10) {
+    if (endGame) {
       let currentDate = getCurrentDate();
       let oldScores = [];
       if (localStorage.getItem('jdd-scores')) {
@@ -50,7 +50,7 @@ function ScoreCard({ round, players, scores, multiplier, columnNames = true }) {
       localStorage.setItem('jdd-scores', JSON.stringify([...oldScores, { date: currentDate, ...moneyObj }]));
     }
 
-  }, [scores, multiplier, round]);
+  }, [scores, multiplier, round, endGame]);
 
   return (
     <div style={{ width: '40vw', marginTop: '5vw' }}>

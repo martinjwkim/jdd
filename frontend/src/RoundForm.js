@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function RoundForm({ setRound, round, players, scores, setScores, multiplier }) {
+function RoundForm({ setRound, round, players, scores, setScores, multiplier, endGame }) {
   const classes = useStyles();
   const INITIAL_STATE = { player1: "", player2: "", player3: "", player4: "" };
   const [formData, setFormData] = useState(INITIAL_STATE);
@@ -79,21 +79,16 @@ function RoundForm({ setRound, round, players, scores, setScores, multiplier }) 
     ))
   }
 
-  const handleClick = () => {
-    setShowEditForm(true)
-  }
-
-
   return (
     <div className='RoundForm'>
       <div className='RoundForm-Left'>
-        <ScoreCard players={players} scores={scores} multiplier={multiplier} columnNames={false} round={round}/>
+        <ScoreCard players={players} scores={scores} multiplier={multiplier} columnNames={false} round={round} endGame={endGame}/>
         <div className='RoundForm-Card'>
           <Card className={classes.root} variant="outlined">
             <CardContent>
               <Typography variant="h6" className={classes.title}>
                 Round {round}
-                <IconButton onClick={handleClick}>
+                <IconButton onClick={()=>setShowEditForm(true)}>
                   <EditIcon />
                 </IconButton>
               </Typography>
