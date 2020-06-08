@@ -29,10 +29,10 @@ function createData(round, player1, player2, player3, player4) {
   }
 }
 
-function ScoresTable({ players, scores }) {
+function ScoresTable({ players, scores, finalRound }) {
 
   const rows =
-    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(round =>
+    [...Array(finalRound).keys()].map(x => x+1).map(round =>
       createData(
         round,
         scores[round]?.player1,
@@ -49,9 +49,9 @@ function ScoresTable({ players, scores }) {
           <TableHead>
             <TableRow>
               <TableCell>Round</TableCell>
-              {['player1','player2','player3','player4'].map(player=>(
-                  <TableCell align="center">{players[player]}</TableCell>
-                ))}
+              {['player1', 'player2', 'player3', 'player4'].map(player => (
+                <TableCell align="center">{players[player]}</TableCell>
+              ))}
             </TableRow>
           </TableHead>
           <TableBody>
@@ -60,7 +60,7 @@ function ScoresTable({ players, scores }) {
                 <TableCell >
                   {row.round}
                 </TableCell>
-                {['player1','player2','player3','player4'].map(player=>(
+                {['player1', 'player2', 'player3', 'player4'].map(player => (
                   <TableCell style={{ background: row[player].color }} align="center">{row[player].score}</TableCell>
                 ))}
               </TableRow>

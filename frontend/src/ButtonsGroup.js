@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function ButtonsGroup({ players, scores, round, multiplier, endGame, setEndGame, setFinalRound }) {
+function ButtonsGroup({ setShowEditForm, setEndGame, setFinalRound }) {
 
   const classes = useStyles();
 
@@ -22,6 +22,7 @@ function ButtonsGroup({ players, scores, round, multiplier, endGame, setEndGame,
         color="primary"
         size="large"
         className={classes.button}
+        onClick={()=>setShowEditForm(true)}
         endIcon={<EditIcon />}
       >
         Edit Round

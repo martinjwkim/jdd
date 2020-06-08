@@ -9,7 +9,7 @@ function NewGame() {
   const [round, setRound] = useState(0);
   const [players, setPlayers] = useState({});
   const [scores, setScores] = useState({});
-  const [multiplier, setMultipler] = useState(0.1)
+  const [multiplier, setMultiplier] = useState(0.1)
   const [finalRound, setFinalRound] = useState(10)
   const [endGame, setEndGame] = useState(false)
 
@@ -27,13 +27,16 @@ function NewGame() {
           players={players}
           scores={scores}
           setScores={setScores}
+          finalRound={finalRound}
           multiplier={multiplier} />}
       {round > finalRound &&
         <FinalScores
           players={players}
           scores={scores}
+          setScores={setScores}
           round={round}
           multiplier={multiplier}
+          finalRound={finalRound}
           setFinalRound={setFinalRound}
           setEndGame={setEndGame}
           endGame={endGame} />}

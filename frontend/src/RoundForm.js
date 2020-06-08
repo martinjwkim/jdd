@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function RoundForm({ setRound, round, players, scores, setScores, multiplier, endGame }) {
+function RoundForm({ setRound, round, players, scores, setScores, multiplier, endGame, finalRound }) {
   const classes = useStyles();
   const INITIAL_STATE = { player1: "", player2: "", player3: "", player4: "" };
   const [formData, setFormData] = useState(INITIAL_STATE);
@@ -104,7 +104,7 @@ function RoundForm({ setRound, round, players, scores, setScores, multiplier, en
           {showEditForm && <EditForm players={players} setScores={setScores} setShowEditForm={setShowEditForm} />}
         </div>
       </div>
-      <ScoresTable players={players} scores={scores} round={round} />
+      <ScoresTable finalRound={finalRound} players={players} scores={scores} round={round} />
     </div>
   );
 }
