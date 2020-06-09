@@ -15,7 +15,6 @@ function NewGame() {
 
   return (
     <div className='NewGame'>
-      test
       {round === 0 &&
         <GameForm
           setRound={setRound}
