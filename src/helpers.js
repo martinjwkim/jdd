@@ -1,5 +1,5 @@
 function scoreMultiplier(num) {
-  if (num === '0') {
+  if (+num === 0) {
     return '-10'
   }
   else if (num > 0 && num <= 7) {
@@ -33,19 +33,19 @@ function moneyCalc(arr, multiplier) {
 }
 
 function bgColor(num) {
-  if (num === '0') {
+  if (+num === 0) {
     return 'lightgreen'
   }
-  else if (num > 0 && num <= 7) {
+  else if (+num > 0 && +num <= 7) {
     return 'white'
   }
-  else if (num > 7 && num <= 9) {
+  else if (+num > 7 && +num <= 9) {
     return 'lightcoral'
   }
-  else if (num > 9 && num <= 11) {
+  else if (+num > 9 && +num <= 11) {
     return 'crimson'
   }
-  else if (num > 11 && num <= 13) {
+  else if (+num > 11 && +num <= 13) {
     return 'red'
   }
 }

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import Alert from '@material-ui/lab/Alert';
 import Button from '@material-ui/core/Button'
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -49,6 +50,7 @@ function RoundForm({ setRound, round, players, scores, setScores, multiplier, en
   const [showEditForm, setShowEditForm] = useState(false)
   const [openModal, setOpenModal] = useState(false);
   const [player, setPlayer] = useState('');
+  const [showAlert, setShowAlert] = useState(false)
 
   const handleOpenModal = (player) => {
     setPlayer(player)
@@ -58,17 +60,26 @@ function RoundForm({ setRound, round, players, scores, setScores, multiplier, en
 
   const handleSubmit = async (evt) => {
     evt.preventDefault();
+    let noErrors = true;
     for (let key in formData){
-      if (formData[key]==='13'){
+      if (+formData[key]===13){
         handleOpenModal(key)
       }
+      if (formData[key]==='' || +formData[key]>13 || +formData[key]<0){
+        noErrors = false;
+      }
     }
-    setScores(oldScores => ({
-      ...oldScores,
-      [round]: formData
-    }))
-    setFormData(() => INITIAL_STATE)
-    setRound((round) => round + 1)
+    if (noErrors){
+      setScores(oldScores => ({
+        ...oldScores,
+        [round]: formData
+      }))
+      setFormData(() => INITIAL_STATE)
+      setRound((round) => round + 1)
+    } else {
+      setShowAlert(true)
+      setTimeout(()=>setShowAlert(false),2000)
+    }
   };
 
   const handleChange = evt => {
@@ -102,6 +113,7 @@ function RoundForm({ setRound, round, players, scores, setScores, multiplier, en
           openModal={openModal} 
           setOpenModal={setOpenModal}/>} */}
       <div className='RoundForm-Left'>
+        {showAlert && <Alert severity="error">Please enter a number between 0-13!</Alert>}
         <ScoreCard players={players} scores={scores} multiplier={multiplier} columnNames={false} round={round} endGame={endGame}/>
         <div className='RoundForm-Card'>
           <Card className={classes.root} variant="outlined">

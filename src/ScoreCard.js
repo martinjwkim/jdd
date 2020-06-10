@@ -53,7 +53,7 @@ function ScoreCard({ round, players, scores, multiplier, columnNames = true, end
   }, [scores, multiplier, round, endGame]);
 
   return (
-    <div style={{ width: '40vw', marginTop: '5vw' }}>
+    <div style={{ width: '40vw', marginTop:'2vh' }}>
       <TableContainer component={Paper}>
         <Table className={classes.table} aria-label="simple table">
           <TableHead>
