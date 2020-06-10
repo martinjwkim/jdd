@@ -18,9 +18,6 @@ function App() {
 export default App;
 
 //bigger font
-//total points
 //animation when losing
 //winner screen
-//edit last hand
-//match history
 //icon instead of numbers

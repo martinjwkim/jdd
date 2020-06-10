@@ -10,6 +10,7 @@ import IconButton from '@material-ui/core/IconButton';
 import EditForm from './EditForm'
 import ScoreCard from './ScoreCard'
 import ScoresTable from './ScoresTable'
+import LaughingModal from './LaughingModal'
 import './RoundForm.css'
 
 const useStyles = makeStyles((theme) => ({
@@ -44,9 +45,22 @@ function RoundForm({ setRound, round, players, scores, setScores, multiplier, en
   const INITIAL_STATE = { player1: "", player2: "", player3: "", player4: "" };
   const [formData, setFormData] = useState(INITIAL_STATE);
   const [showEditForm, setShowEditForm] = useState(false)
+  const [openModal, setOpenModal] = useState(false);
+  const [player, setPlayer] = useState('');
+
+  const handleOpenModal = (player) => {
+    setPlayer(player)
+    setOpenModal(true)
+    setTimeout(()=>{setOpenModal(false)},12000)
+  }
 
   const handleSubmit = async (evt) => {
     evt.preventDefault();
+    for (let key in formData){
+      if (formData[key]==='13'){
+        handleOpenModal(key)
+      }
+    }
     setScores(oldScores => ({
       ...oldScores,
       [round]: formData
@@ -81,6 +95,11 @@ function RoundForm({ setRound, round, players, scores, setScores, multiplier, en
 
   return (
     <div className='RoundForm'>
+      {/* {openModal && 
+        <LaughingModal
+          player={player}
+          openModal={openModal} 
+          setOpenModal={setOpenModal}/>} */}
       <div className='RoundForm-Left'>
         <ScoreCard players={players} scores={scores} multiplier={multiplier} columnNames={false} round={round} endGame={endGame}/>
         <div className='RoundForm-Card'>
