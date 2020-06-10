@@ -134,7 +134,7 @@ function RoundForm({ setRound, round, players, scores, setScores, multiplier, en
               </form>
             </CardContent>
           </Card>
-          {showEditForm && <EditForm players={players} setScores={setScores} setShowEditForm={setShowEditForm} />}
+          {showEditForm && <EditForm setShowAlert={setShowAlert} finalRound={finalRound} players={players} setScores={setScores} setShowEditForm={setShowEditForm} />}
         </div>
       </div>
       <ScoresTable finalRound={finalRound} players={players} scores={scores} round={round} />
