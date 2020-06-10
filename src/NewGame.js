@@ -1,13 +1,10 @@
 import React, { useState } from 'react';
-import GameForm from './GameForm'
 import RoundForm from './RoundForm'
 import FinalScores from './FinalScores'
 import './NewGame.css'
 
-function NewGame() {
+function NewGame({round, setRound, players}) {
 
-  const [round, setRound] = useState(0);
-  const [players, setPlayers] = useState({});
   const [scores, setScores] = useState({});
   const [multiplier, setMultiplier] = useState(0.1)
   const [finalRound, setFinalRound] = useState(10)
@@ -15,10 +12,6 @@ function NewGame() {
 
   return (
     <div className='NewGame'>
-      {round === 0 &&
-        <GameForm
-          setRound={setRound}
-          setPlayers={setPlayers} />}
       {round > 0 && round <= finalRound &&
         <RoundForm
           endGame={endGame}

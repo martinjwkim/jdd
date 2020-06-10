@@ -48,7 +48,7 @@ function ScoresTable({ players, scores, finalRound }) {
         <Table aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell>Round</TableCell>
+              <TableCell align='center'>Round</TableCell>
               {['player1', 'player2', 'player3', 'player4'].map(player => (
                 <TableCell align="center">{players[player]}</TableCell>
               ))}
@@ -57,7 +57,7 @@ function ScoresTable({ players, scores, finalRound }) {
           <TableBody>
             {rows.map((row) => (
               <TableRow key={row.round}>
-                <TableCell >
+                <TableCell align="center">
                   {row.round}
                 </TableCell>
                 {['player1', 'player2', 'player3', 'player4'].map(player => (

@@ -18,31 +18,31 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
   },
+  button: {
+    fontSize: '20px',
+    margin: '10px'
+  }
 }));
-
-
-
 
 function Navigation() {
 
   const history = useHistory();
   const classes = useStyles();
+
   const handleClick = (route) => {
     history.push(route)
   }
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar color='primary' position="static">
         <Toolbar>
           <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="home" onClick={()=>handleClick('/')}>
-            <HomeIcon />
+            <HomeIcon/>
           </IconButton>
-          <Typography variant="h6" className={classes.title}>
-            Choi Dai Di
-          </Typography>
-          <Button color="inherit" onClick={()=>handleClick('newgame')}>New Game</Button>
-          <Button color="inherit" onClick={()=>handleClick('scores')}>Scores</Button>
+          <Typography variant="h6" className={classes.title}></Typography>
+          <Button className={classes.button} color="inherit" onClick={()=>handleClick('/')}>New Game</Button>
+          <Button className={classes.button} color="inherit" onClick={()=>handleClick('scores')}>Scores</Button>
         </Toolbar>
       </AppBar>
     </div>
@@ -50,4 +50,3 @@ function Navigation() {
 }
 
 export default Navigation;
-

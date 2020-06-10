@@ -32,7 +32,7 @@ function ButtonsGroup({ setShowEditForm, setEndGame, setFinalRound }) {
         color="primary"
         size="large"
         className={classes.button}
-        onClick={() => setFinalRound(12)}
+        onClick={() => setFinalRound(x=>x+2)}
         endIcon={<AddIcon />}
       >
         Play 2 More
