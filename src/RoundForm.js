@@ -11,6 +11,8 @@ import EditForm from './EditForm'
 import ScoreCard from './ScoreCard'
 import ScoresTable from './ScoresTable'
 import LaughingModal from './LaughingModal'
+import redCard from './red-card.jpg'
+import blueCard from './blue-card.jpg'
 import './RoundForm.css'
 
 const useStyles = makeStyles((theme) => ({
@@ -20,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     width: '300px',
-    marginTop: '5vh'
+    position: 'relative'
   },
   form: {
     flexGrow: 1,
@@ -37,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
   },
   button: {
     marginTop: '20px'
-  }
+  },
 }));
 
 function RoundForm({ setRound, round, players, scores, setScores, multiplier, endGame, finalRound }) {
@@ -104,6 +106,7 @@ function RoundForm({ setRound, round, players, scores, setScores, multiplier, en
         <ScoreCard players={players} scores={scores} multiplier={multiplier} columnNames={false} round={round} endGame={endGame}/>
         <div className='RoundForm-Card'>
           <Card className={classes.root} variant="outlined">
+            <img style={{position: 'absolute', left:0}} src={round%2===1 ? redCard : blueCard} width='300px' height='360px' alt='red-card'/>
             <CardContent>
               <Typography variant="h6" className={classes.title}>
                 Round {round}
