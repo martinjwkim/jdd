@@ -89,7 +89,6 @@ function RoundForm({ setRound, round, players, scores, setScores, multiplier, en
         size='medium'
         label={`${players[key]}`}
         onChange={handleChange}
-        required = {true}
         autoFocus = {key === 'player1' ? true : false}
         value={formData[key]} />
     ))
