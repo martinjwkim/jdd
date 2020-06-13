@@ -22,11 +22,11 @@ app.use(authenticateJWT);
 
 const authRoutes = require("./routes/auth");
 const userRoutes = require("./routes/users");
-const messageRoutes = require("./routes/messages");
+const gameRoutes = require("./routes/games");
 
 app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
-app.use("/messages", messageRoutes);
+app.use("/games", gameRoutes);
 
 /** 404 handler */
 
