@@ -6,9 +6,18 @@ CREATE TABLE users (
     last_login_at timestamp with time zone
 );
 
+CREATE TABLE players {
+    id SERIAL PRIMARY KEY,
+    username text NOT NULL REFERENCES users,
+    player1 text NOT NULL,
+    player2 text NOT NULL,
+    player3 text NOT NULL,
+    player4 text NOT NULL,
+}
+
 CREATE TABLE scores (
     id SERIAL PRIMARY KEY,
-    group_name text NOT NULL REFERENCES users,
+    username text NOT NULL REFERENCES users,
     body text NOT NULL,
     played_at timestamp with time zone NOT NULL,
 );
