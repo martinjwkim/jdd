@@ -112,13 +112,13 @@ class User {
 
   /** Return games from this user.
    *
-   * [{id, to_user, body, sent_at, read_at}]
+   * [{id, username, group_name, player1, player2, player3, player4, etc}]
    *
    * where to_user is
    *   {username, first_name, last_name, phone}
    */
 
-  static async gamesFrom(username) {
+  static async games(username) {
     const result = await db.query(
         `SELECT g.id,
                 g.username,
