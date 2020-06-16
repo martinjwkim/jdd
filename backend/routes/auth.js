@@ -28,7 +28,7 @@ router.post("/login", async function (req, res, next) {
 
 /** register user: registers, logs in, and returns token.
  *
- * {username, password, first_name, last_name, phone} => {token}.
+ * {username, password, group_name, player1, player2, player3, player4}} => {token}.
  */
 
 router.post("/register", async function (req, res, next) {

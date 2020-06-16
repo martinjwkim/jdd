@@ -7,7 +7,7 @@ const router = new Router();
 
 /** get list of users.
  *
- * => {users: [{username, first_name, last_name, phone}, ...]}
+ * => {users: [{{username, group_name, player1, player2, player3, player4}, ...]}
  *
  **/
 
@@ -24,7 +24,7 @@ router.get("/", ensureLoggedIn, async function (req, res, next) {
 
 /** get detail of users.
  *
- * => {user: {username, first_name, last_name, phone, join_at, last_login_at}}
+ * => {user: {{username, group_name, player1, player2, player3, player4, join_at, last_login_at}}
  *
  **/
 
