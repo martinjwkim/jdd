@@ -43,7 +43,10 @@ router.post("/", ensureLoggedIn, async function (req, res, next) {
   try {
     let msg = await Game.create({
       username: req.user.username,
-      body: req.body.body
+      p1score: req.body.p1score,
+      p2score: req.body.p2score,
+      p3score: req.body.p3score,
+      p4score: req.body.p4score,
     });
 
     return res.json({game: msg});
