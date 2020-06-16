@@ -114,26 +114,18 @@ class User {
    *
    * [{id, username, group_name, player1, player2, player3, player4, etc}]
    *
-   * where to_user is
-   *   {username, first_name, last_name, phone}
    */
 
   static async games(username) {
     const result = await db.query(
-        `SELECT g.id,
-                g.username,
-                u.group_name,
-                u.player1,
-                u.player2,
-                u.player3,
-                u.player4,
-                g.p1score,
-                g.p2score,
-                g.p3score,
-                g.p4score,
-                g.played_at
-          FROM games AS g
-            JOIN users AS u ON g.username = u.username
+        `SELECT id,
+                username,
+                p1score,
+                p2score,
+                p3score,
+                p4score,
+                played_at
+          FROM games
           WHERE username = $1`,
         [username]);
 
