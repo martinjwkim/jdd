@@ -13,9 +13,12 @@ function rootReducer(state = INITIAL_STATE, action) {
     case "NEXT_ROUND":
       return { ...state, round: state.round + 1 };
 
-    case "DECREMENT":
-      return { ...state, count: state.count - 1 };
+    case "SET_PLAYERS":
+      return { ...state, players: action.players };
 
+    case "ADD_SCORE":
+      return { ...state, scores: {...state.scores, [action.round]: action.scores} };
+    
     default:
       return state;
   }
