@@ -55,7 +55,7 @@ function ScoresTable() {
             <TableRow>
               <TableCell align='center'>Round</TableCell>
               {['player1', 'player2', 'player3', 'player4'].map(player => (
-                <TableCell align="center">{players[player]}</TableCell>
+                <TableCell align="center" key={player}>{players[player]}</TableCell>
               ))}
             </TableRow>
           </TableHead>
@@ -66,7 +66,7 @@ function ScoresTable() {
                   {row.round}
                 </TableCell>
                 {['player1', 'player2', 'player3', 'player4'].map(player => (
-                  <TableCell style={{ background: row[player].color }} align="center">{row[player].score}</TableCell>
+                  <TableCell key={player} style={{ background: row[player].color }} align="center">{row[player].score}</TableCell>
                 ))}
               </TableRow>
             ))}

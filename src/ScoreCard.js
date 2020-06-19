@@ -9,7 +9,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { useSelector } from "react-redux";
 import { scoreMultiplier, moneyCalc, finalScoreColor, getCurrentDate } from './helpers'
-
+import axios from 'axios'
 
 const useStyles = makeStyles({
   table: {

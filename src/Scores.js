@@ -8,6 +8,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { finalScoreColor } from './helpers'
+import { v4 as uuid } from 'uuid';
 import './Scores.css';
 
 const useStyles = makeStyles({
@@ -35,18 +36,18 @@ function Scores() {
               <TableRow>
                 <TableCell>Date</TableCell>
                 {['Player 1', 'Player 2', 'Player 3', 'Player 4'].map(player => (
-                  <TableCell align="center">{player}</TableCell>
+                  <TableCell align="center" key={player}>{player}</TableCell>
                 ))}
               </TableRow>
             </TableHead>
             <TableBody>
               {scores.map((score) => (
-                <TableRow key={score.date}>
+                <TableRow key={uuid()}>
                   <TableCell component="th" scope="score">
                     {score.date}
                   </TableCell>
                   {['player1', 'player2', 'player3', 'player4'].map(player => (
-                    <TableCell style={{ background: finalScoreColor(score[player]) }} align="center">{`$${score[player]}`}</TableCell>
+                    <TableCell key={player} style={{ background: finalScoreColor(score[player]) }} align="center">{`$${score[player]}`}</TableCell>
                   ))}
                 </TableRow>
               ))}
