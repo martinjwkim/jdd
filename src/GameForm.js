@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import { useDispatch } from "react-redux";
 import { useHistory } from 'react-router-dom'
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -35,16 +36,17 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function GameForm({ setRound, setPlayers }) {
+function GameForm() {
   const history = useHistory();
   const classes = useStyles();
   const INITIAL_STATE = { 'player1': 'Player 1', 'player2': 'Player 2', 'player3': 'Player 3', 'player4': 'Player 4' }
   const [formData, setFormData] = useState(INITIAL_STATE);
+  const dispatch = useDispatch();
 
   const handleSubmit = async (evt) => {
     evt.preventDefault();
-    setPlayers(formData)
-    setRound(1);
+    dispatch({ type: "SET_PLAYERS", players: formData})
+    dispatch({ type: "ROUND_ONE" })
     history.push('/newgame')
   };
 

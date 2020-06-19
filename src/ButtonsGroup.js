@@ -1,4 +1,5 @@
 import React from 'react';
+import { useDispatch } from "react-redux";
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import EditIcon from '@material-ui/icons/Edit';
@@ -11,8 +12,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function ButtonsGroup({ setShowEditForm, setEndGame, setFinalRound }) {
-
+function ButtonsGroup({ setShowEditForm }) {
+  const dispatch = useDispatch();
   const classes = useStyles();
 
   return (
@@ -32,7 +33,7 @@ function ButtonsGroup({ setShowEditForm, setEndGame, setFinalRound }) {
         color="primary"
         size="large"
         className={classes.button}
-        onClick={() => setFinalRound(x=>x+2)}
+        onClick={() => dispatch({ type: "ADD_ROUNDS"})}
         endIcon={<AddIcon />}
       >
         Play 2 More
@@ -42,7 +43,7 @@ function ButtonsGroup({ setShowEditForm, setEndGame, setFinalRound }) {
         color="primary"
         size="large"
         className={classes.button}
-        onClick={() => setEndGame(true)}
+        onClick={() => dispatch({ type: "END_GAME" })}
         endIcon={<CheckIcon />}
       >
         Finish Game

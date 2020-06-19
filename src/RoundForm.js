@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useSelector, useDispatch } from "react-redux";
 import { makeStyles } from '@material-ui/core/styles';
 import Alert from '@material-ui/lab/Alert';
 import Button from '@material-ui/core/Button'
@@ -43,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function RoundForm({ setRound, round, players, scores, setScores, multiplier, endGame, finalRound }) {
+function RoundForm() {
   const classes = useStyles();
   const INITIAL_STATE = { player1: "", player2: "", player3: "", player4: "" };
   const [formData, setFormData] = useState(INITIAL_STATE);
@@ -51,6 +52,9 @@ function RoundForm({ setRound, round, players, scores, setScores, multiplier, en
   const [openModal, setOpenModal] = useState(false);
   const [player, setPlayer] = useState('');
   const [showAlert, setShowAlert] = useState(false)
+  const dispatch = useDispatch();
+  const round = useSelector(store => store.round);
+  const players = useSelector(store => store.players);
 
   const handleOpenModal = (player) => {
     setPlayer(player)
@@ -70,12 +74,9 @@ function RoundForm({ setRound, round, players, scores, setScores, multiplier, en
       }
     }
     if (noErrors){
-      setScores(oldScores => ({
-        ...oldScores,
-        [round]: formData
-      }))
+      dispatch({ type: "ADD_SCORE", round: round, scores: formData })
       setFormData(() => INITIAL_STATE)
-      setRound((round) => round + 1)
+      dispatch({ type: "NEXT_ROUND" })
     } else {
       setShowAlert(true)
       setTimeout(()=>setShowAlert(false),2000)
@@ -114,7 +115,7 @@ function RoundForm({ setRound, round, players, scores, setScores, multiplier, en
           setOpenModal={setOpenModal}/>} */}
       <div className='RoundForm-Left'>
         {showAlert && <Alert severity="error">Please enter a number between 0-13!</Alert>}
-        <ScoreCard players={players} scores={scores} multiplier={multiplier} columnNames={false} round={round} endGame={endGame}/>
+        <ScoreCard columnNames={false} />
         <div className='RoundForm-Card'>
           <Card className={classes.root} variant="outlined">
             <img style={{position: 'absolute', left:0}} src={round%2===1 ? redCard : blueCard} width='300px' height='360px' alt='red-card'/>
@@ -134,10 +135,10 @@ function RoundForm({ setRound, round, players, scores, setScores, multiplier, en
               </form>
             </CardContent>
           </Card>
-          {showEditForm && <EditForm setShowAlert={setShowAlert} finalRound={finalRound} players={players} setScores={setScores} setShowEditForm={setShowEditForm} />}
+          {showEditForm && <EditForm setShowAlert={setShowAlert} setShowEditForm={setShowEditForm} />}
         </div>
       </div>
-      <ScoresTable finalRound={finalRound} players={players} scores={scores} round={round} />
+      <ScoresTable />
     </div>
   );
 }

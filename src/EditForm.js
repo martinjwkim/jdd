@@ -7,6 +7,7 @@ import ClearIcon from '@material-ui/icons/Clear';
 import IconButton from '@material-ui/core/IconButton';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
+import { useSelector, useDispatch } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   margin: {
@@ -36,10 +37,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-function EditForm({ setShowAlert, players, setScores, setShowEditForm, finalRound }) {
+function EditForm({ setShowAlert, setShowEditForm }) {
   const classes = useStyles();
+  const dispatch = useDispatch();
   const INITIAL_STATE = { round: "", player1: "", player2: "", player3: "", player4: "" };
   const [formData, setFormData] = useState(INITIAL_STATE);
+  const players = useSelector(store => store.players);
+  const finalRound = useSelector(store => store.finalRound);
 
   const handleSubmit = async (evt) => {
     evt.preventDefault();
@@ -53,15 +57,12 @@ function EditForm({ setShowAlert, players, setScores, setShowEditForm, finalRoun
       noErrors = false;
     }
     if (noErrors) {
-      setScores(oldScores => ({
-        ...oldScores,
-        [formData.round]: {
-          player1: formData.player1,
-          player2: formData.player2,
-          player3: formData.player3,
-          player4: formData.player4
-        }
-      }))
+      dispatch({ type: "ADD_SCORE" , round: formData.round, scores: {
+        player1: formData.player1,
+        player2: formData.player2,
+        player3: formData.player3,
+        player4: formData.player4
+      }})
       setShowEditForm(false)
     } else {
       setShowAlert(true)

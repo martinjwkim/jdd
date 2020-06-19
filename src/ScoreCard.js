@@ -7,6 +7,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import { useSelector } from "react-redux";
 import { scoreMultiplier, moneyCalc, finalScoreColor, getCurrentDate } from './helpers'
 
 
@@ -17,11 +18,16 @@ const useStyles = makeStyles({
 });
 
 
-function ScoreCard({ round, players, scores, multiplier, columnNames = true, endGame }) {
+function ScoreCard({ columnNames = true }) {
+  
   const classes = useStyles();
   const [finalScores, setFinalScores] = useState({});
   const [moneyScores, setMoneyScores] = useState([0, 0, 0, 0]);
-
+  const players = useSelector(store => store.players);
+  const round = useSelector(store => store.round);
+  const multiplier = useSelector(store => store.multiplier);
+  const endGame = useSelector(store => store.endGame);
+  const scores = useSelector(store => store.scores)
 
   useEffect(() => {
     let player1 = 0;

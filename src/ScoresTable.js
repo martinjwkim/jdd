@@ -6,6 +6,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import { useSelector } from "react-redux";
 import { scoreMultiplier, bgColor } from './helpers'
 import './ScoresTable.css'
 
@@ -29,7 +30,11 @@ function createData(round, player1, player2, player3, player4) {
   }
 }
 
-function ScoresTable({ players, scores, finalRound }) {
+function ScoresTable() {
+
+  const players = useSelector(store => store.players);
+  const finalRound = useSelector(store => store.finalRound);
+  const scores = useSelector(store => store.scores);
 
   const rows =
     [...Array(finalRound).keys()].map(x => x+1).map(round =>

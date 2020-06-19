@@ -1,38 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import RoundForm from './RoundForm'
+import GameForm from './GameForm'
 import FinalScores from './FinalScores'
+import { useSelector } from "react-redux";
 import './NewGame.css'
 
-function NewGame({round, setRound, players}) {
+function NewGame() {
 
-  const [scores, setScores] = useState({});
-  const [multiplier, setMultiplier] = useState(0.1)
-  const [finalRound, setFinalRound] = useState(10)
-  const [endGame, setEndGame] = useState(false)
+  const round = useSelector(store => store.round);
+  const finalRound = useSelector(store => store.finalRound)
 
   return (
     <div className='NewGame'>
-      {round > 0 && round <= finalRound &&
-        <RoundForm
-          endGame={endGame}
-          setRound={setRound}
-          round={round}
-          players={players}
-          scores={scores}
-          setScores={setScores}
-          finalRound={finalRound}
-          multiplier={multiplier} />}
-      {round > finalRound &&
-        <FinalScores
-          players={players}
-          scores={scores}
-          setScores={setScores}
-          round={round}
-          multiplier={multiplier}
-          finalRound={finalRound}
-          setFinalRound={setFinalRound}
-          setEndGame={setEndGame}
-          endGame={endGame} />}
+      {round === 0 && <GameForm/>}
+      {round > 0 && round <= finalRound && <RoundForm />}
+      {round > finalRound && <FinalScores />}
     </div>
   );
 }
