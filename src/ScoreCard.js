@@ -29,6 +29,16 @@ function ScoreCard({ columnNames = true }) {
   const endGame = useSelector(store => store.endGame);
   const scores = useSelector(store => store.scores)
 
+  const addToDB = async () => {
+    // await axios.post("/games", {
+    //   username: username,
+    //   p1score: 1,
+    //   p2score: 2,
+    //   p3score: 3,
+    //   p4score: -10,
+    // });
+  }
+
   useEffect(() => {
     let player1 = 0;
     let player2 = 0;
@@ -49,6 +59,7 @@ function ScoreCard({ columnNames = true }) {
     setMoneyScores(moneyArr)
     if (endGame) {
       let currentDate = getCurrentDate();
+      addToDB()
       let oldScores = [];
       if (localStorage.getItem('jdd-scores')) {
         oldScores = JSON.parse(localStorage.getItem('jdd-scores'));

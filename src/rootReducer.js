@@ -1,8 +1,9 @@
-import { NEXT_ROUND, SET_PLAYERS, ADD_SCORE, ROUND_ONE, END_GAME, ADD_ROUNDS } from "./actionTypes";
+import { SET_USER, LOGOUT_USER, NEXT_ROUND, SET_PLAYERS, ADD_SCORE, ROUND_ONE, END_GAME, ADD_ROUNDS } from "./actionTypes";
 import cloneDeep from 'lodash/cloneDeep';
 
 const INITIAL_STATE =
 {
+  user: null,
   round: 0,
   players: {},
   scores: {},
@@ -16,6 +17,14 @@ function rootReducer(state = INITIAL_STATE, action) {
   let stateDeepCopy = cloneDeep(state);
 
   switch (action.type) {
+    case SET_USER:
+      stateDeepCopy.user = action.user
+      return stateDeepCopy
+
+    case LOGOUT_USER:
+      stateDeepCopy.user = null
+      return stateDeepCopy
+
     case NEXT_ROUND:
       stateDeepCopy.round = stateDeepCopy.round + 1
       return stateDeepCopy
