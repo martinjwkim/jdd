@@ -7,6 +7,8 @@ import Routes from './Routes'
 import Api from "./Api";
 import useLocalStorage from "./useLocalStorage";
 import './App.css';
+import axios from "axios";
+
 
 export const TOKEN_STORAGE_ID = "choidaidi-token";
 
@@ -20,7 +22,9 @@ function App() {
     async function getCurrentUser() {
       try {
         let { username } = decode(token);
-        let currentUser = await Api.getCurrentUser(username);
+        let currentUser = (await axios.get(`http://localhost:5000/users/${username}`, { params: { _token: token } })).data;
+        console.log(currentUser)
+        // let currentUser = await Api.getCurrentUser(username);
         dispatch({ type: "SET_USER", user: currentUser })
       } catch (err) {
         dispatch({ type: "LOGOUT_USER"});

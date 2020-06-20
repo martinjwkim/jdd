@@ -7,6 +7,7 @@ const { authenticateJWT } = require("./middleware/auth");
 
 const ExpressError = require("./expressError")
 const app = express();
+const morgan = require('morgan');
 
 // allow both form-encoded and json body parsing
 app.use(express.json());
@@ -14,11 +15,10 @@ app.use(express.urlencoded({extended: true}));
 
 // allow connections to all routes from any browser
 app.use(cors());
-
 // get auth token for all routes
 app.use(authenticateJWT);
-
 /** routes */
+app.use(morgan('dev'));
 
 const authRoutes = require("./routes/auth");
 const userRoutes = require("./routes/users");
