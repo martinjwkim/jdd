@@ -46,7 +46,7 @@ function bgColor(num) {
     return 'crimson'
   }
   else if (+num > 11 && +num <= 13) {
-    return 'red'
+    return 'black'
   }
 }
 
