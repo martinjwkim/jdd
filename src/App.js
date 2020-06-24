@@ -46,8 +46,3 @@ function App() {
 }
 
 export default App;
-
-//bigger font
-//animation when losing
-//winner screen
-//icon instead of numbers
