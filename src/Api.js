@@ -14,7 +14,7 @@ class Api {
 
     if (verb === "get") {
       q = axios.get(
-        `${BASE_URL}/${endpoint}`, { params: { _token, ...params } });
+        `${BASE_URL}/${endpoint}`, { headers : { _token, ...params } });
     } else if (verb === "post") {
       q = axios.post(
         `${BASE_URL}/${endpoint}`, { _token, ...params });

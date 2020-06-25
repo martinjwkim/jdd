@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { decode } from "jsonwebtoken";
 import Navigation from './Navigation'
 import Routes from './Routes'
@@ -22,10 +22,10 @@ function App() {
     async function getCurrentUser() {
       try {
         let { username } = decode(token);
-        let currentUser = (await axios.get(`http://localhost:5000/users/${username}`, { params: { _token: token } })).data;
-        console.log(currentUser)
-        // let currentUser = await Api.getCurrentUser(username);
+        console.log(username)
+        let currentUser = await Api.getCurrentUser(username);
         dispatch({ type: "SET_USER", user: currentUser })
+        dispatch({ type: "SET_PLAYERS", players: currentUser})
       } catch (err) {
         dispatch({ type: "LOGOUT_USER"});
       }
@@ -35,10 +35,15 @@ function App() {
     getCurrentUser();
   }, [token, dispatch]);
 
+  const handleLogOut = () => {
+    dispatch({ type: "LOGOUT_USER"})
+    setToken(null)
+  }
+
   return (
     <div className="App">
       <BrowserRouter>
-        <Navigation />
+        <Navigation handleLogOut={handleLogOut}/>
         <Routes setToken={setToken}/>
       </BrowserRouter>
     </div>

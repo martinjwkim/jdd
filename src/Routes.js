@@ -13,7 +13,7 @@ function Routes({setToken}) {
   return (
     <div>
       <Switch>
-        <Route exact path="/"><GameForm /></Route>
+        <Route exact path="/"></Route>
         <Route exact path="/login"><Login setToken={setToken}/></Route>
         <Route exact path="/newgame"><NewGame /></Route>
         <Route exact path="/scores"><Scores /></Route>

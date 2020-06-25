@@ -54,7 +54,8 @@ function RoundForm() {
   const [showAlert, setShowAlert] = useState(false)
   const dispatch = useDispatch();
   const round = useSelector(store => store.round);
-  const players = useSelector(store => store.players);
+  const user = useSelector(store => store.user)
+  const players =  useSelector(store => store.players)
 
   const handleOpenModal = (player) => {
     setPlayer(player)

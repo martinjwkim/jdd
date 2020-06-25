@@ -4,7 +4,7 @@ import cloneDeep from 'lodash/cloneDeep';
 const INITIAL_STATE =
 {
   user: null,
-  round: 0,
+  round: 1,
   players: {},
   scores: {},
   endGame: false,

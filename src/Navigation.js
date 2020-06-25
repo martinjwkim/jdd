@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -24,10 +25,11 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function Navigation() {
+function Navigation({handleLogOut}) {
 
   const history = useHistory();
   const classes = useStyles();
+  const user = useSelector(store => store.user)
 
   const handleClick = (route) => {
     history.push(route)
@@ -37,13 +39,18 @@ function Navigation() {
     <div className={classes.root}>
       <AppBar color='primary' position="static">
         <Toolbar>
-          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="home" onClick={()=>handleClick('/')}>
-            <HomeIcon/>
+          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="home" onClick={() => handleClick('/')}>
+            <HomeIcon />
           </IconButton>
           <Typography variant="h6" className={classes.title}></Typography>
-          <Button className={classes.button} color="inherit" onClick={()=>handleClick('/')}>New Game</Button>
-          <Button className={classes.button} color="inherit" onClick={()=>handleClick('scores')}>Scores</Button>
-          <Button className={classes.button} color="inherit" onClick={()=>handleClick('graph')}>Graphs</Button>
+          {user ?
+            <div>
+              <Button className={classes.button} color="inherit" onClick={() => handleClick('/newgame')}>New Game</Button>
+              <Button className={classes.button} color="inherit" onClick={() => handleClick('scores')}>Scores</Button>
+              <Button className={classes.button} color="inherit" onClick={() => handleClick('graph')}>Graphs</Button>
+              <Button className={classes.button} color="inherit" onClick={() => handleLogOut()}>Logout</Button>
+            </div>
+            : <Button className={classes.button} color="inherit" onClick={() => handleClick('/login')}>Login</Button>}
         </Toolbar>
       </AppBar>
     </div>

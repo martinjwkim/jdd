@@ -12,8 +12,7 @@ function NewGame() {
 
   return (
     <div className='NewGame'>
-      {round === 0 && <GameForm/>}
-      {round > 0 && round <= finalRound && <RoundForm />}
+      {round <= finalRound && <RoundForm />}
       {round > finalRound && <FinalScores />}
     </div>
   );

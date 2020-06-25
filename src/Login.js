@@ -61,7 +61,7 @@ function Login({ setToken }) {
 
     setToken(token);
     // TODO: set round and players
-    history.push("/newgame");
+    history.push("/");
   }
 
   function handleChange(e) {
