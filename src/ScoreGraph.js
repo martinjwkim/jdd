@@ -1,5 +1,5 @@
 import React from 'react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine } from 'recharts';
 // import { useSelector } from "react-redux";
 import './ScoreGraph.css'
 
@@ -21,13 +21,14 @@ function ScoreGraph() {
         }}
       >
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="date" />
+        <XAxis dataKey="date"/>
         <YAxis />
         <Tooltip />
         <Legend />
-        <Line type="monotone" dataKey="player1" stroke="black" />
+        <ReferenceLine y="0" stroke="black" strokeDasharray="3 3"/>
+        <Line type="monotone" dataKey="player1" stroke="red" />
         <Line type="monotone" dataKey="player2" stroke="green" />
-        <Line type="monotone" dataKey="player3" stroke="red" />
+        <Line type="monotone" dataKey="player3" stroke="#FF00FF" />
         <Line type="monotone" dataKey="player4" stroke="blue" />
       </LineChart>
     </div>
