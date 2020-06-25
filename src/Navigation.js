@@ -19,8 +19,8 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   button: {
-    fontSize: '20px',
-    margin: '10px'
+    fontSize: '18px',
+    margin: '5px'
   }
 }));
 
@@ -43,6 +43,7 @@ function Navigation() {
           <Typography variant="h6" className={classes.title}></Typography>
           <Button className={classes.button} color="inherit" onClick={()=>handleClick('/')}>New Game</Button>
           <Button className={classes.button} color="inherit" onClick={()=>handleClick('scores')}>Scores</Button>
+          <Button className={classes.button} color="inherit" onClick={()=>handleClick('graph')}>Graphs</Button>
         </Toolbar>
       </AppBar>
     </div>
