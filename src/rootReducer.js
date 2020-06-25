@@ -30,7 +30,12 @@ function rootReducer(state = INITIAL_STATE, action) {
       return stateDeepCopy
 
     case SET_PLAYERS:
-      stateDeepCopy.players = action.players
+      let players = {
+        player1: action.players.player1, 
+        player2: action.players.player2, 
+        player3: action.players.player3, 
+        player4: action.players.player4}
+      stateDeepCopy.players = players
       return stateDeepCopy
 
     case ADD_SCORE:

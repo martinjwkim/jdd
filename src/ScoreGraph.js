@@ -1,14 +1,14 @@
 import React from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine } from 'recharts';
-// import { useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import './ScoreGraph.css'
 
 function ScoreGraph() {
 
   // const scores = useSelector(store => store.scores)
   const scores = JSON.parse(localStorage.getItem('jdd-scores'))
-  console.log(scores);
-  const data = scores.map(score=>({date: score.date, player1:score.player1, player2:score.player2, player3:score.player3, player4:score.player4, }))
+  const players = useSelector(store => store.players)
+  const data = scores.map(score=>({date: score.date, [players.player1]:score.player1, [players.player2]:score.player2, [players.player3]:score.player3, [players.player4]:score.player4, }))
 
   return (
     <div className='ScoreGraph'>
@@ -26,10 +26,10 @@ function ScoreGraph() {
         <Tooltip />
         <Legend />
         <ReferenceLine y="0" stroke="black" strokeDasharray="3 3"/>
-        <Line type="monotone" dataKey="player1" stroke="red" />
-        <Line type="monotone" dataKey="player2" stroke="green" />
-        <Line type="monotone" dataKey="player3" stroke="#FF00FF" />
-        <Line type="monotone" dataKey="player4" stroke="blue" />
+        <Line type="monotone" dataKey={players.player1} stroke="red" />
+        <Line type="monotone" dataKey={players.player2} stroke="green" />
+        <Line type="monotone" dataKey={players.player3} stroke="#FF00FF" />
+        <Line type="monotone" dataKey={players.player4} stroke="blue" />
       </LineChart>
     </div>
   );
