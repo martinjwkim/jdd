@@ -47,7 +47,7 @@ function Navigation({handleLogOut}) {
             <div>
               <Button className={classes.button} color="inherit" onClick={() => handleClick('/newgame')}>New Game</Button>
               <Button className={classes.button} color="inherit" onClick={() => handleClick('scores')}>Scores</Button>
-              <Button className={classes.button} color="inherit" onClick={() => handleClick('graph')}>Graphs</Button>
+              <Button className={classes.button} color="inherit" onClick={() => handleClick('graph')}>Stats</Button>
               <Button className={classes.button} color="inherit" onClick={() => handleLogOut()}>Logout</Button>
             </div>
             : <Button className={classes.button} color="inherit" onClick={() => handleClick('/login')}>Login</Button>}

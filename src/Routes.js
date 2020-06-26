@@ -1,6 +1,5 @@
 import React from 'react';
 import { Switch, Route } from "react-router-dom";
-import GameForm from './GameForm'
 import NewGame from './NewGame'
 import Scores from './Scores'
 import ScoreGraph from './ScoreGraph'
