@@ -35,6 +35,11 @@ function Navigation({handleLogOut}) {
     history.push(route)
   }
 
+  const logOut = () => {
+    history.push('/')
+    handleLogOut()
+  }
+
   return (
     <div className={classes.root}>
       <AppBar color='primary' position="static">
@@ -48,7 +53,7 @@ function Navigation({handleLogOut}) {
               <Button className={classes.button} color="inherit" onClick={() => handleClick('/newgame')}>New Game</Button>
               <Button className={classes.button} color="inherit" onClick={() => handleClick('scores')}>Scores</Button>
               <Button className={classes.button} color="inherit" onClick={() => handleClick('graph')}>Stats</Button>
-              <Button className={classes.button} color="inherit" onClick={() => handleLogOut()}>Logout</Button>
+              <Button className={classes.button} color="inherit" onClick={() => logOut()}>Logout</Button>
             </div>
             : <Button className={classes.button} color="inherit" onClick={() => handleClick('/login')}>Login</Button>}
         </Toolbar>

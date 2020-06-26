@@ -7,7 +7,6 @@ import Routes from './Routes'
 import Api from "./Api";
 import useLocalStorage from "./useLocalStorage";
 import './App.css';
-import axios from "axios";
 
 
 export const TOKEN_STORAGE_ID = "choidaidi-token";
@@ -22,7 +21,6 @@ function App() {
     async function getCurrentUser() {
       try {
         let { username } = decode(token);
-        console.log(username)
         let currentUser = await Api.getCurrentUser(username);
         dispatch({ type: "SET_USER", user: currentUser })
         dispatch({ type: "SET_PLAYERS", players: currentUser})
