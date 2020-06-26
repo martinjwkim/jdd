@@ -9,6 +9,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { finalScoreColor } from './helpers'
 import { v4 as uuid } from 'uuid';
+import { useSelector } from 'react-redux'
 import './Scores.css';
 
 const useStyles = makeStyles({
@@ -21,6 +22,7 @@ function Scores() {
 
   const [scores, setScores] = useState([])
   const classes = useStyles();
+  const players = useSelector(store=>store.players)
 
   useEffect(() => {
     let jddScores = JSON.parse(localStorage.getItem('jdd-scores'))
@@ -35,7 +37,7 @@ function Scores() {
             <TableHead>
               <TableRow>
                 <TableCell>Date</TableCell>
-                {['Player 1', 'Player 2', 'Player 3', 'Player 4'].map(player => (
+                {Object.values(players).map(player => (
                   <TableCell align="center" key={player}>{player}</TableCell>
                 ))}
               </TableRow>
