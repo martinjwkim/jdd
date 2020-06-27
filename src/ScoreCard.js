@@ -65,7 +65,7 @@ function ScoreCard({ columnNames = true }) {
         oldScores = JSON.parse(localStorage.getItem('jdd-scores'));
       }
       localStorage.setItem('jdd-scores', JSON.stringify([...oldScores, { date: currentDate, ...moneyObj }]));
-      dispatch({ type: "RESET_GAME"});
+      // dispatch({ type: "RESET_GAME"});
     }
 
   }, [scores, multiplier, round, endGame, dispatch]);
