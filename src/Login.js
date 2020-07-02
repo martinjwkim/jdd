@@ -1,11 +1,13 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, Redirect } from "react-router-dom";
 import "./Login.css";
+import { useSelector } from "react-redux";
 import Alert from "./Alert";
 import Api from "./Api";
 
 function Login({ setToken }) {
   const history = useHistory();
+  const user = useSelector(store=>store.user)
   const [activeView, setActiveView] = useState("login");
   const [loginInfo, setLoginInfo] = useState({
     username: "",
@@ -17,6 +19,10 @@ function Login({ setToken }) {
     player4: "",
     errors: []
   });
+  
+  if (user) {
+    return <Redirect to="/" />;
+  }
 
   function setLoginView() {
     setActiveView("login");
