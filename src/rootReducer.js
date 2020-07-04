@@ -59,7 +59,7 @@ function rootReducer(state = INITIAL_STATE, action) {
       stateDeepCopy.finalRound = 10
       stateDeepCopy.endGame = false
       stateDeepCopy.scores = {}
-      return 
+      return stateDeepCopy
 
     default:
       return state;

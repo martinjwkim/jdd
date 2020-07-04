@@ -7,7 +7,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { scoreMultiplier, moneyCalc, finalScoreColor, getCurrentDate } from './helpers'
 
 const useStyles = makeStyles({
@@ -17,7 +17,7 @@ const useStyles = makeStyles({
 });
 
 
-function ScoreCard({ columnNames = true }) {
+function ScoreCard({ columnNames = true, setPlayAgain }) {
   
   const classes = useStyles();
   const [finalScores, setFinalScores] = useState({});
@@ -27,7 +27,6 @@ function ScoreCard({ columnNames = true }) {
   const multiplier = useSelector(store => store.multiplier);
   const endGame = useSelector(store => store.endGame);
   const scores = useSelector(store => store.scores)
-  const dispatch = useDispatch();
 
   const addToDB = async () => {
     // await axios.post("/games", {
@@ -65,10 +64,10 @@ function ScoreCard({ columnNames = true }) {
         oldScores = JSON.parse(localStorage.getItem('jdd-scores'));
       }
       localStorage.setItem('jdd-scores', JSON.stringify([...oldScores, { date: currentDate, ...moneyObj }]));
-      // dispatch({ type: "RESET_GAME"});
+      setPlayAgain(true)
     }
 
-  }, [scores, multiplier, round, endGame, dispatch]);
+  }, [scores, multiplier, round, endGame, setPlayAgain]);
 
   return (
     <div style={{ width: '40vw', marginTop:'2vh' }}>
