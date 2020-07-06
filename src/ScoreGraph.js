@@ -41,8 +41,8 @@ function ScoreGraph({ player1 = null, player2 = null, player3 = null, player4 = 
   return (
     <div className='ScoreGraph'>
       <LineChart
-        width={800}
-        height={500}
+        width={1000}
+        height={600}
         data={data}
         margin={{
           top: 5, right: 5, left: 5, bottom: 5,

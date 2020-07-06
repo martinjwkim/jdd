@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   button: {
-    fontSize: '18px',
+    fontSize: '1.5vw',
     margin: '5px'
   }
 }));

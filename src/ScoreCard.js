@@ -7,6 +7,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import useWindowDimensions from "./useWindowDimensions";
 import { useSelector } from "react-redux";
 import { scoreMultiplier, moneyCalc, finalScoreColor, getCurrentDate } from './helpers'
 
@@ -27,7 +28,7 @@ function ScoreCard({ columnNames = true, setPlayAgain }) {
   const multiplier = useSelector(store => store.multiplier);
   const endGame = useSelector(store => store.endGame);
   const scores = useSelector(store => store.scores)
-
+  
   const addToDB = async () => {
     // await axios.post("/games", {
     //   username: username,
@@ -37,6 +38,8 @@ function ScoreCard({ columnNames = true, setPlayAgain }) {
     //   p4score: -10,
     // });
   }
+
+  const fontSize = '2vw'
 
   useEffect(() => {
     let player1 = 0;
@@ -66,7 +69,6 @@ function ScoreCard({ columnNames = true, setPlayAgain }) {
       localStorage.setItem('jdd-scores', JSON.stringify([...oldScores, { date: currentDate, ...moneyObj }]));
       setPlayAgain(true)
     }
-
   }, [scores, multiplier, round, endGame, setPlayAgain]);
 
   return (
@@ -76,26 +78,26 @@ function ScoreCard({ columnNames = true, setPlayAgain }) {
           <TableHead>
             <TableRow>
               {columnNames && <TableCell style={{ fontSize: '24px' }} align="center"></TableCell>}
-              <TableCell style={{ fontSize: '24px' }} align="center">{players.player1}</TableCell>
-              <TableCell style={{ fontSize: '24px' }} align="center">{players.player2}</TableCell>
-              <TableCell style={{ fontSize: '24px' }} align="center">{players.player3}</TableCell>
-              <TableCell style={{ fontSize: '24px' }} align="center">{players.player4}</TableCell>
+              <TableCell style={{ fontSize }} align="center">{players.player1}</TableCell>
+              <TableCell style={{ fontSize }} align="center">{players.player2}</TableCell>
+              <TableCell style={{ fontSize }} align="center">{players.player3}</TableCell>
+              <TableCell style={{ fontSize }} align="center">{players.player4}</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             <TableRow>
-              {columnNames && <TableCell style={{ fontSize: '24px' }} align="center" component="th" scope="row">Total Score</TableCell>}
-              <TableCell style={{ fontSize: '24px' }} align="center">{finalScores.player1}</TableCell>
-              <TableCell style={{ fontSize: '24px' }} align="center">{finalScores.player2}</TableCell>
-              <TableCell style={{ fontSize: '24px' }} align="center">{finalScores.player3}</TableCell>
-              <TableCell style={{ fontSize: '24px' }} align="center">{finalScores.player4}</TableCell>
+              {columnNames && <TableCell style={{ fontSize }} align="center" component="th" scope="row">Total Score</TableCell>}
+              <TableCell style={{ fontSize }} align="center">{finalScores.player1}</TableCell>
+              <TableCell style={{ fontSize }} align="center">{finalScores.player2}</TableCell>
+              <TableCell style={{ fontSize }} align="center">{finalScores.player3}</TableCell>
+              <TableCell style={{ fontSize }} align="center">{finalScores.player4}</TableCell>
             </TableRow>
             <TableRow>
-              {columnNames && <TableCell style={{ fontSize: '24px' }} align="center" component="th" scope="row">Money Owed</TableCell>}
-              <TableCell style={{ fontSize: '24px', background: finalScoreColor(moneyScores[0]) }} align="center">{`$${moneyScores[0]}`}</TableCell>
-              <TableCell style={{ fontSize: '24px', background: finalScoreColor(moneyScores[1]) }} align="center">{`$${moneyScores[1]}`}</TableCell>
-              <TableCell style={{ fontSize: '24px', background: finalScoreColor(moneyScores[2]) }} align="center">{`$${moneyScores[2]}`}</TableCell>
-              <TableCell style={{ fontSize: '24px', background: finalScoreColor(moneyScores[3]) }} align="center">{`$${moneyScores[3]}`}</TableCell>
+              {columnNames && <TableCell style={{ fontSize }} align="center" component="th" scope="row">Money Owed</TableCell>}
+              <TableCell style={{ fontSize, background: finalScoreColor(moneyScores[0]) }} align="center">{`$${moneyScores[0]}`}</TableCell>
+              <TableCell style={{ fontSize, background: finalScoreColor(moneyScores[1]) }} align="center">{`$${moneyScores[1]}`}</TableCell>
+              <TableCell style={{ fontSize, background: finalScoreColor(moneyScores[2]) }} align="center">{`$${moneyScores[2]}`}</TableCell>
+              <TableCell style={{ fontSize, background: finalScoreColor(moneyScores[3]) }} align="center">{`$${moneyScores[3]}`}</TableCell>
             </TableRow>
           </TableBody>
         </Table>

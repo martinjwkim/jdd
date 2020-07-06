@@ -1,12 +1,12 @@
 .ScoresTable {
-  width: 700px;
+  width: 40vw;
   margin-top: 5vh;
 }
 
 .ScoresTable th {
-  font-size: 18px;
+  font-size: 1.5vw;
 }
 
 .ScoresTable td {
-  font-size: 18px;
+  font-size: 1.5vw;
 }
