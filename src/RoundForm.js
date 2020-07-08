@@ -23,7 +23,8 @@ const useStyles = makeStyles((theme) => ({
   },
   root: {
     flexGrow: 1,
-    width: '300px',
+    width: '400px',
+    height: '500px',
     position: 'relative'
   },
   form: {
@@ -119,7 +120,7 @@ function RoundForm() {
         <ScoreCard columnNames={false} />
         <div className='RoundForm-Card'>
           <Card className={classes.root} variant="outlined">
-            <img style={{position: 'absolute', left:0}} src={round%2===1 ? redCard : blueCard} width='300px' height='360px' alt='red-card'/>
+            <img style={{position: 'absolute', left:0}} src={round%2===1 ? redCard : blueCard} width='400px' height='500px' alt='red-card'/>
             <CardContent>
               <Typography variant="h6" className={classes.title}>
                 Round {round}
