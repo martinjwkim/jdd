@@ -15,7 +15,9 @@ import ScoresTable from './ScoresTable'
 import LaughingModal from './LaughingModal'
 import redCard from './red-card.jpg'
 import blueCard from './blue-card.jpg'
+import useWindowDimensions from './useWindowDimensions'
 import './RoundForm.css'
+
 
 const useStyles = makeStyles((theme) => ({
   margin: {
@@ -23,8 +25,8 @@ const useStyles = makeStyles((theme) => ({
   },
   root: {
     flexGrow: 1,
-    width: '400px',
-    height: '500px',
+    width: '25vw',
+    height: '30vw',
     position: 'relative'
   },
   form: {
@@ -39,10 +41,14 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1,
+    fontSize: '1.5vw'
   },
   button: {
     marginTop: '20px'
   },
+  TextField: {
+    height: '20px'
+  }
 }));
 
 function RoundForm() {
@@ -56,32 +62,37 @@ function RoundForm() {
   const dispatch = useDispatch();
   const round = useSelector(store => store.round);
   const user = useSelector(store => store.user)
-  const players =  useSelector(store => store.players)
+  const players = useSelector(store => store.players)
+
+  const { width } = useWindowDimensions()
+  const cardWidth = `${.25 * width}px`
+  const cardHeight = `${.3 * width}px`
+
 
   const handleOpenModal = (player) => {
     setPlayer(player)
     setOpenModal(true)
-    setTimeout(()=>{setOpenModal(false)},12000)
+    setTimeout(() => { setOpenModal(false) }, 12000)
   }
 
   const handleSubmit = async (evt) => {
     evt.preventDefault();
     let noErrors = true;
-    for (let key in formData){
-      if (+formData[key]===13){
+    for (let key in formData) {
+      if (+formData[key] === 13) {
         handleOpenModal(key)
       }
-      if (formData[key]==='' || +formData[key]>13 || +formData[key]<0){
+      if (formData[key] === '' || +formData[key] > 13 || +formData[key] < 0) {
         noErrors = false;
       }
     }
-    if (noErrors){
+    if (noErrors) {
       dispatch({ type: "ADD_SCORE", round: round, scores: formData })
       setFormData(() => INITIAL_STATE)
       dispatch({ type: "NEXT_ROUND" })
     } else {
       setShowAlert(true)
-      setTimeout(()=>setShowAlert(false),2000)
+      setTimeout(() => setShowAlert(false), 2000)
     }
   };
 
@@ -96,6 +107,7 @@ function RoundForm() {
   const showInputs = () => {
     return ['player1', 'player2', 'player3', 'player4'].map(key => (
       <TextField
+        className='TextField'
         type='number'
         id={key}
         key={`${round}-${key}`}
@@ -103,7 +115,7 @@ function RoundForm() {
         size='medium'
         label={`${players[key]}`}
         onChange={handleChange}
-        autoFocus = {key === 'player1' ? true : false}
+        autoFocus={key === 'player1' ? true : false}
         value={formData[key]} />
     ))
   }
@@ -120,11 +132,11 @@ function RoundForm() {
         <ScoreCard columnNames={false} />
         <div className='RoundForm-Card'>
           <Card className={classes.root} variant="outlined">
-            <img style={{position: 'absolute', left:0}} src={round%2===1 ? redCard : blueCard} width='400px' height='500px' alt='red-card'/>
+            <img style={{ position: 'absolute', left: 0 }} src={round % 2 === 1 ? redCard : blueCard} width={cardWidth} height={cardHeight} alt='red-card' />
             <CardContent>
               <Typography variant="h6" className={classes.title}>
                 Round {round}
-                <IconButton onClick={()=>setShowEditForm(true)}>
+                <IconButton onClick={() => setShowEditForm(true)}>
                   <EditIcon />
                 </IconButton>
               </Typography>
