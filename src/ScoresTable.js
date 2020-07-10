@@ -66,7 +66,7 @@ function ScoresTable() {
                   {row.round}
                 </TableCell>
                 {['player1', 'player2', 'player3', 'player4'].map(player => (
-                  <TableCell key={player} style={{ background: row[player].color }} align="center">{row[player].score > 11 ? <i className="fas fa-skull-crossbones skull-icon"></i> : row[player].score}</TableCell>
+                  <TableCell key={player} style={{ background: row[player].color }} align="center">{row[player].score > 40 ? <i className="fas fa-skull-crossbones skull-icon"></i> : row[player].score}</TableCell>
                 ))}
               </TableRow>
             ))}
