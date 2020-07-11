@@ -11,6 +11,7 @@ import { finalScoreColor } from './helpers'
 import { v4 as uuid } from 'uuid';
 import { useSelector } from 'react-redux'
 import './Scores.css';
+import Api from './Api';
 
 const useStyles = makeStyles({
   table: {
@@ -23,11 +24,23 @@ function Scores() {
   const [scores, setScores] = useState([])
   const classes = useStyles();
   const players = useSelector(store=>store.players)
+  const user = useSelector(store=>store.user)
 
   useEffect(() => {
     let jddScores = JSON.parse(localStorage.getItem('jdd-scores'))
-    setScores(jddScores)
-  }, [setScores])
+    // setScores(jddScores)
+
+    async function getScores () {
+      let games;
+      try {
+        games = await Api.getGames(user.username)
+        setScores(games)
+      } catch (errors) {
+        console.error('error at get games api')
+      }
+    }
+    getScores()
+  }, [setScores, user])
 
   const showScores = () => {
     return (
@@ -46,9 +59,9 @@ function Scores() {
               {scores.map((score) => (
                 <TableRow key={uuid()}>
                   <TableCell component="th" scope="score">
-                    {score.date}
+                    {score.played_at.split('T')[0].slice(5)}
                   </TableCell>
-                  {['player1', 'player2', 'player3', 'player4'].map(player => (
+                  {['p1score', 'p2score', 'p3score', 'p4score'].map(player => (
                     <TableCell key={player} style={{ background: finalScoreColor(score[player]) }} align="center">{`$${score[player]}`}</TableCell>
                   ))}
                 </TableRow>

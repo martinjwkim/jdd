@@ -10,6 +10,7 @@ import Paper from '@material-ui/core/Paper';
 import useWindowDimensions from "./useWindowDimensions";
 import { useSelector } from "react-redux";
 import { scoreMultiplier, moneyCalc, finalScoreColor, getCurrentDate } from './helpers'
+import Api from "./Api";
 
 const useStyles = makeStyles({
   table: {
@@ -19,29 +20,40 @@ const useStyles = makeStyles({
 
 
 function ScoreCard({ columnNames = true, setPlayAgain }) {
-  
+
   const classes = useStyles();
   const [finalScores, setFinalScores] = useState({});
   const [moneyScores, setMoneyScores] = useState([0, 0, 0, 0]);
+  const user = useSelector(store => store.user);
   const players = useSelector(store => store.players);
   const round = useSelector(store => store.round);
   const multiplier = useSelector(store => store.multiplier);
   const endGame = useSelector(store => store.endGame);
   const scores = useSelector(store => store.scores)
-
-  const addToDB = async () => {
-    // await axios.post("/games", {
-    //   username: username,
-    //   p1score: 1,
-    //   p2score: 2,
-    //   p3score: 3,
-    //   p4score: -10,
-    // });
-  }
-
   const fontSize = '2vw'
 
   useEffect(() => {
+    async function handleEndGame() {
+      let currentDate = getCurrentDate();
+        let oldScores = [];
+        if (localStorage.getItem('jdd-scores')) {
+          oldScores = JSON.parse(localStorage.getItem('jdd-scores'));
+        }
+        localStorage.setItem('jdd-scores', JSON.stringify([...oldScores, { date: currentDate, ...moneyObj }]));
+        try {
+          await Api.saveGame({
+            username: user.username,
+            p1score: moneyObj.player1,
+            p2score: moneyObj.player2,
+            p3score: moneyObj.player3,
+            p4score: moneyObj.player4,
+          });
+        } catch (errors) {
+          console.log('error at saveGame api')
+        }
+        setPlayAgain(true)
+    }
+
     let player1 = 0;
     let player2 = 0;
     let player3 = 0;
@@ -56,48 +68,33 @@ function ScoreCard({ columnNames = true, setPlayAgain }) {
 
     setFinalScores({ player1, player2, player3, player4 })
     let moneyArr = moneyCalc([player1, player2, player3, player4], multiplier)
-    let moneyObj = {player1: moneyArr[0], player2: moneyArr[1], player3: moneyArr[2], player4: moneyArr[3]}
+    let moneyObj = { player1: moneyArr[0], player2: moneyArr[1], player3: moneyArr[2], player4: moneyArr[3] }
 
-    setMoneyScores(moneyArr)
     if (endGame) {
-      let currentDate = getCurrentDate();
-      addToDB()
-      let oldScores = [];
-      if (localStorage.getItem('jdd-scores')) {
-        oldScores = JSON.parse(localStorage.getItem('jdd-scores'));
-      }
-      localStorage.setItem('jdd-scores', JSON.stringify([...oldScores, { date: currentDate, ...moneyObj }]));
-      setPlayAgain(true)
+      handleEndGame()
     }
-  }, [scores, multiplier, round, endGame, setPlayAgain]);
+    setMoneyScores(moneyArr)
+
+  }, [scores, multiplier, round, endGame, setPlayAgain, user]);
 
   return (
-    <div style={{ width: '40vw', marginTop:'2vh' }}>
+    <div style={{ width: '40vw', marginTop: '2vh' }}>
       <TableContainer component={Paper}>
         <Table className={classes.table} aria-label="simple table">
           <TableHead>
             <TableRow>
               {columnNames && <TableCell style={{ fontSize: '24px' }} align="center"></TableCell>}
-              <TableCell style={{ fontSize }} align="center">{players.player1}</TableCell>
-              <TableCell style={{ fontSize }} align="center">{players.player2}</TableCell>
-              <TableCell style={{ fontSize }} align="center">{players.player3}</TableCell>
-              <TableCell style={{ fontSize }} align="center">{players.player4}</TableCell>
+              {['player1','player2','player3','player4'].map((player)=><TableCell key={player} style={{ fontSize }} align="center">{players[player]}</TableCell>)}
             </TableRow>
           </TableHead>
           <TableBody>
             <TableRow>
               {columnNames && <TableCell style={{ fontSize }} align="center" component="th" scope="row">Total Score</TableCell>}
-              <TableCell style={{ fontSize }} align="center">{finalScores.player1}</TableCell>
-              <TableCell style={{ fontSize }} align="center">{finalScores.player2}</TableCell>
-              <TableCell style={{ fontSize }} align="center">{finalScores.player3}</TableCell>
-              <TableCell style={{ fontSize }} align="center">{finalScores.player4}</TableCell>
+              {['player1','player2','player3','player4'].map((player)=><TableCell key={player} style={{ fontSize }} align="center">{finalScores[player]}</TableCell>)}
             </TableRow>
             <TableRow>
               {columnNames && <TableCell style={{ fontSize }} align="center" component="th" scope="row">Money Owed</TableCell>}
-              <TableCell style={{ fontSize, background: finalScoreColor(moneyScores[0]) }} align="center">{`$${moneyScores[0]}`}</TableCell>
-              <TableCell style={{ fontSize, background: finalScoreColor(moneyScores[1]) }} align="center">{`$${moneyScores[1]}`}</TableCell>
-              <TableCell style={{ fontSize, background: finalScoreColor(moneyScores[2]) }} align="center">{`$${moneyScores[2]}`}</TableCell>
-              <TableCell style={{ fontSize, background: finalScoreColor(moneyScores[3]) }} align="center">{`$${moneyScores[3]}`}</TableCell>
+              {[0,1,2,3].map((num)=><TableCell key={num} style={{ fontSize, background: finalScoreColor(moneyScores[num]) }} align="center">{`$${moneyScores[num]}`}</TableCell>)}
             </TableRow>
           </TableBody>
         </Table>

@@ -39,7 +39,7 @@ class Api {
 
   static async saveGame(data) {
     let res = await this.request(`games/`, data, "post");
-    return res.token;
+    return res.game;
   }
 
   static async login(data) {

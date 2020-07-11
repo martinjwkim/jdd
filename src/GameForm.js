@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
     transform: 'scale(0.8)',
   },
   title: {
-    fontSize: 14,
+    fontSize: '1.5vw',
   },
   pos: {
     marginBottom: 12,

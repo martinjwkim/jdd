@@ -57,5 +57,15 @@ router.post("/", ensureLoggedIn, async function (req, res, next) {
   }
 });
 
+router.delete("/:id", async function(req, res, next){
+	try {
+		await Game.remove(req.params.id);
+
+		return res.json({message: "Job deleted."});
+
+	} catch (err) {
+		return next(err)
+	}
+})
 
 module.exports = router;

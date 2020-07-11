@@ -54,6 +54,15 @@ class Game {
 
     return result.rows[0];
   }
+
+  static async remove(id){
+    const result = await db.query(`
+    DELETE FROM games WHERE id = $1 RETURNING id`,
+    [id]);
+    if (!result.rows.length) {
+      throw new ExpressError(`There is no game with an id ${id}`, 404);
+    }
+  }
 }
 
 

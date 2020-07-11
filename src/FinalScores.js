@@ -7,6 +7,7 @@ import EditForm from './EditForm'
 import ScoresTable from './ScoresTable'
 import ScoreCard from './ScoreCard'
 
+
 const useStyles = makeStyles((theme) => ({
   button: {
     margin: theme.spacing(1),
