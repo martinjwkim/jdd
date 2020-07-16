@@ -18,7 +18,6 @@ const useStyles = makeStyles({
   },
 });
 
-
 function ScoreCard({ columnNames = true, setPlayAgain }) {
 
   const classes = useStyles();
