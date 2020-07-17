@@ -61,7 +61,7 @@ router.delete("/:id", async function(req, res, next){
 	try {
 		await Game.remove(req.params.id);
 
-		return res.json({message: "Job deleted."});
+		return res.json({message: "Game deleted."});
 
 	} catch (err) {
 		return next(err)
