@@ -19,6 +19,7 @@ const useStyles = makeStyles({
 });
 
 function ScoreCard({ columnNames = true, setPlayAgain }) {
+  //refactor everything in here
 
   const classes = useStyles();
   const [finalScores, setFinalScores] = useState({});

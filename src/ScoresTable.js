@@ -46,6 +46,16 @@ function ScoresTable() {
         scores[round]?.player4
       )
     )
+  
+  const icon = (score) => {
+    if (score > 40){
+      return <i className="fas fa-skull-crossbones skull-icon"></i>
+    } else if (score === -10){
+      return <i className="far fa-thumbs-up"></i>
+    } else {
+      return score
+    }
+  }
 
   return (
     <div className='ScoresTable'>
@@ -66,7 +76,7 @@ function ScoresTable() {
                   {row.round}
                 </TableCell>
                 {['player1', 'player2', 'player3', 'player4'].map(player => (
-                  <TableCell key={player} style={{ background: row[player].color }} align="center">{row[player].score > 40 ? <i className="fas fa-skull-crossbones skull-icon"></i> : row[player].score}</TableCell>
+                  <TableCell key={player} style={{ background: row[player].color }} align="center">{icon(row[player].score)}</TableCell>
                 ))}
               </TableRow>
             ))}
