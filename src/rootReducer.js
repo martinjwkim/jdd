@@ -10,6 +10,7 @@ const INITIAL_STATE =
   endGame: false,
   multiplier: 0.1,
   finalRound: 10,
+  playAgain: false,
 };
 
 function rootReducer(state = INITIAL_STATE, action) {
@@ -48,6 +49,7 @@ function rootReducer(state = INITIAL_STATE, action) {
 
     case END_GAME:
       stateDeepCopy.endGame = true
+      stateDeepCopy.playAgain = true
       return stateDeepCopy
 
     case ADD_ROUNDS:
@@ -59,6 +61,7 @@ function rootReducer(state = INITIAL_STATE, action) {
       stateDeepCopy.finalRound = 10
       stateDeepCopy.endGame = false
       stateDeepCopy.scores = {}
+      stateDeepCopy.playAgain = false
       return stateDeepCopy
 
     default:

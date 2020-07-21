@@ -121,6 +121,10 @@ function RoundForm() {
     ))
   }
 
+  const setMoneyObj = () => {
+    return 
+  }
+
   return (
     <div className='RoundForm'>
       {/* {openModal && 
@@ -130,7 +134,7 @@ function RoundForm() {
           setOpenModal={setOpenModal}/>} */}
       <div className='RoundForm-Left'>
         {showAlert && <Alert severity="error">Please enter a number between 0-13!</Alert>}
-        <ScoreCard columnNames={false} />
+        <ScoreCard columnNames={false} setMoneyObj={setMoneyObj}/>
         <div className='RoundForm-Card'>
           <Card className={classes.root} variant="outlined">
             <img style={{ position: 'absolute', left: 0 }} src={round % 2 === 1 ? redCard : blueCard} width={cardWidth} height={cardHeight} alt='red-card' />

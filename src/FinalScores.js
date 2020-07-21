@@ -17,14 +17,15 @@ const useStyles = makeStyles((theme) => ({
 function FinalScores() {
 
   const [showEditForm, setShowEditForm] = useState(false)
-  const [playAgain, setPlayAgain] = useState(false)
+  const [moneyObj, setMoneyObj] =  useState({})
   const endGame = useSelector(store => store.endGame);
+  const playAgain = useSelector(store => store.playAgain);
   const classes = useStyles();
   const dispatch = useDispatch();
 
   return (
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
-      {!endGame && <ButtonsGroup setShowEditForm={setShowEditForm} />}
+      {!endGame && <ButtonsGroup setShowEditForm={setShowEditForm} moneyObj={moneyObj}/>}
       {showEditForm && <EditForm setShowEditForm={setShowEditForm} />}
       {playAgain &&
         <Button variant="contained"
@@ -35,7 +36,7 @@ function FinalScores() {
         >
           Play Again
         </Button>}
-      <ScoreCard setPlayAgain={setPlayAgain}/>
+      <ScoreCard setMoneyObj={setMoneyObj}/>
       <ScoresTable />
     </div>
   );

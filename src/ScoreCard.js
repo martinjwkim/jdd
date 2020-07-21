@@ -7,10 +7,8 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import useWindowDimensions from "./useWindowDimensions";
-import { useSelector } from "react-redux";
-import { scoreMultiplier, moneyCalc, finalScoreColor, getCurrentDate } from './helpers'
-import Api from "./Api";
+import { useSelector, useDispatch } from "react-redux";
+import { scoreMultiplier, moneyCalc, finalScoreColor } from './helpers'
 
 const useStyles = makeStyles({
   table: {
@@ -18,41 +16,21 @@ const useStyles = makeStyles({
   },
 });
 
-function ScoreCard({ columnNames = true, setPlayAgain }) {
+function ScoreCard({ columnNames = true, setMoneyObj }) {
   //refactor everything in here
 
   const classes = useStyles();
   const [finalScores, setFinalScores] = useState({});
   const [moneyScores, setMoneyScores] = useState([0, 0, 0, 0]);
-  const user = useSelector(store => store.user);
   const players = useSelector(store => store.players);
   const round = useSelector(store => store.round);
   const multiplier = useSelector(store => store.multiplier);
   const endGame = useSelector(store => store.endGame);
   const scores = useSelector(store => store.scores)
   const fontSize = '2vw'
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    async function handleEndGame() {
-      let currentDate = getCurrentDate();
-        let oldScores = [];
-        if (localStorage.getItem('jdd-scores')) {
-          oldScores = JSON.parse(localStorage.getItem('jdd-scores'));
-        }
-        localStorage.setItem('jdd-scores', JSON.stringify([...oldScores, { date: currentDate, ...moneyObj }]));
-        try {
-          await Api.saveGame({
-            username: user.username,
-            p1score: moneyObj.player1,
-            p2score: moneyObj.player2,
-            p3score: moneyObj.player3,
-            p4score: moneyObj.player4,
-          });
-        } catch (errors) {
-          console.log('error at saveGame api')
-        }
-        setPlayAgain(true)
-    }
 
     let player1 = 0;
     let player2 = 0;
@@ -68,14 +46,11 @@ function ScoreCard({ columnNames = true, setPlayAgain }) {
 
     setFinalScores({ player1, player2, player3, player4 })
     let moneyArr = moneyCalc([player1, player2, player3, player4], multiplier)
-    let moneyObj = { player1: moneyArr[0], player2: moneyArr[1], player3: moneyArr[2], player4: moneyArr[3] }
 
-    if (endGame) {
-      handleEndGame()
-    }
     setMoneyScores(moneyArr)
+    setMoneyObj({ player1: moneyArr[0], player2: moneyArr[1], player3: moneyArr[2], player4: moneyArr[3] })
 
-  }, [scores, multiplier, round, endGame, setPlayAgain, user]);
+  }, [scores, multiplier, round, endGame, dispatch, setMoneyObj]);
 
   return (
     <div style={{ width: '40vw', marginTop: '2vh' }}>
