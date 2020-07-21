@@ -27,7 +27,10 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     width: '25vw',
     height: '30vw',
-    position: 'relative'
+    position: 'relative',
+    display: 'flex',
+    alignItems: 'center',
+   justifyContent: 'center'
   },
   form: {
     flexGrow: 1,
@@ -138,7 +141,7 @@ function RoundForm() {
         <div className='RoundForm-Card'>
           <Card className={classes.root} variant="outlined">
             <img style={{ position: 'absolute', left: 0 }} src={round % 2 === 1 ? redCard : blueCard} width={cardWidth} height={cardHeight} alt='red-card' />
-            <CardContent>
+            <CardContent style={{}}>
               <Typography variant="h6" className={classes.title}>
                 Round {round}
                 <IconButton onClick={() => setShowEditForm(true)}>
