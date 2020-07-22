@@ -48,10 +48,11 @@ function ScoresTable() {
     )
   
   const icon = (score) => {
+    console.log('score :', score)
     if (score > 40){
       return <i className="fas fa-skull-crossbones skull-icon"></i>
-    } else if (score === -10){
-      return <i className="far fa-thumbs-up"></i>
+    } else if (score === '-10'){
+      return <i className="fas fa-trophy"></i>
     } else {
       return score
     }
